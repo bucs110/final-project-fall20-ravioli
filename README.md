@@ -20,7 +20,9 @@ Our project is an RPG with a combat and economy system. There are waves of enemi
 
 ## User Interface Design
  *![gui design](assets/gui_design_screen.jpg)
-	 This is the screen the player sees when they begin the game.
+ This is the screen the player sees when they begin the game.
+*![gui design](assets/gui_design_main.jpg)
+This the the screen the player sees while playing the game.
  *![gui design](assets/gui_design_lose.jpg)
  This is the screen the player sees if they lose the game.
  *![gui design](assets/gui_design_victory.jpg)
