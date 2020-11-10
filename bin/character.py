@@ -13,7 +13,11 @@ class Character(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
         self.rect.y = position[1]
-        ###self.direction = 'left' ##this might be different
+
+        self.direction = "right"
+
+        self.health = 100
+
 
     def moveUp(self):
         """
@@ -23,6 +27,7 @@ class Character(pygame.sprite.Sprite):
         """
         if self.rect.y > 100:
             self.rect.y -= 1
+        self.direction = "up"
 
     def moveDown(self):
         """
@@ -32,16 +37,18 @@ class Character(pygame.sprite.Sprite):
         """
         if self.rect.y < 700:
             self.rect.y += 1
+        self.direction = "down"
 
     def moveRight(self):
         """
         Moves the character upwards
         Args: None
-        Return:None
+        Return: None
         """
 
         if self.rect.x < 1400:
             self.rect.x += 1
+        self.direction = "right"
 
     def moveLeft(self):
         """
@@ -51,6 +58,16 @@ class Character(pygame.sprite.Sprite):
         """
         if self.rect.x > 100:
             self.rect.x -= 1
+        self.direction = "left"
+
+    def draw(self, screen):
+        """
+        Used to draw and update the enemy class
+        Args: None
+        Return: None
+        """
+        screen.blit(self.character.image, (self.character.rect.x, self.character.rect.y))
+
 
     def update(self):
         """
