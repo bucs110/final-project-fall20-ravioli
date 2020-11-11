@@ -16,6 +16,8 @@ class Character(pygame.sprite.Sprite):
         self.rect.y = position[1]
 
         self.direction = "right"
+        self.STATE = "movement"
+
 
         self.health = 100
         self.cooldown_timer = 1500 ## ~5 seconds ##

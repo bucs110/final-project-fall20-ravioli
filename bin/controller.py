@@ -20,7 +20,7 @@ class Controller:
         ##ESTABLISH SPRITE GROUPS##
         self.all_sprites = pygame.sprite.Group( (self.character, self.enemy, self.enemy2) )
         self.all_enemies = pygame.sprite.Group(self.enemy, self.enemy2)
-        #self.weapons = pygame.sprite.Group(self.sword)
+        self.weapons = ()
 
     def mainloop(self):
         while True:
@@ -54,7 +54,8 @@ class Controller:
                     if event.key == pygame.K_SPACE:
                         if sword == sword_cooldown:
                             self.sword = bin.melee.Melee(70, "assets/resizedd_penne_sword_vertical.png")
-                            self.sword.add(self.all_sprites)
+                            self.sword.add((self.weapons, self.all_sprites))
+
                             self.sword.strike(self.character.givePosition())
                             enemy_got_hit = pygame.sprite.spritecollide(self.sword, self.all_enemies, False)
                             for i in enemy_got_hit:
