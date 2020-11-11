@@ -34,10 +34,13 @@ This the the screen the player sees while playing the game.
 
 ## Program Design
 * Non-Standard libraries
-    * << You should have a list of any additional libraries or modules used (pygame, request) beyond non-standard python. >>
-    * For each additional module you should include
-        * url for the module documentation
-        * a short description of the module
+    * Random
+	    * https://docs.python.org/3/library/random.html
+	    * The random module is a psuedo-random number generator.
+	* Pygame
+		* https://www.pygame.org/docs/
+		* Pygame is a framework library that handles the view of a program and is designed for writing video games.
+
 * Class Interface Design
         * ![class diagram](assets/classDiagram.jpg) 
 * Classes
