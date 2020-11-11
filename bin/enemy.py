@@ -3,7 +3,7 @@ import random
 import bin.functions
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, position, filename):
+    def __init__(self, position, health, filename):
         """
         Initializes the enemies for the user
         Args:
@@ -17,6 +17,9 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = position[1]
         self.count = 0
         self.direction = "up"
+        self.health = health
+        ## I hate to redefine these but its the easiest way to do this##
+        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
 
     def update(self):
         """
@@ -26,22 +29,23 @@ class Enemy(pygame.sprite.Sprite):
         """
         speed = 100
         self.direction = bin.functions.randomDirection(self.count, self.direction)
-        if self.direction == "up" and self.rect.y > 100:
+        #self.direction = "none" ##make the enemy stationary for testing purposes##
+        if self.direction == "up" and self.rect.y > self.upper_boundry:
             self.rect.y -= 1
             self.count += 1
             if self.count == speed:
                 self.count = 0
-        if self.direction == "down" and self.rect.y < 700:
+        if self.direction == "down" and self.rect.y < self.lower_boundry:
             self.rect.y += 1
             self.count += 1
             if self.count == speed:
                 self.count = 0
-        if self.direction == "right" and self.rect.x < 1400:
+        if self.direction == "right" and self.rect.x < self.right_boundry:
             self.rect.x += 1
             self.count += 1
             if self.count == speed:
                 self.count = 0
-        if self.direction == "left" and self.rect.x > 100:
+        if self.direction == "left" and self.rect.x > self.left_boundry:
             self.rect.x -= 1
             self.count += 1
             if self.count == speed:
@@ -58,3 +62,23 @@ class Enemy(pygame.sprite.Sprite):
         Return: None
         """
         screen.blit(self.enemy.image, (self.enemy.rect.x, self.enemy.rect.y))
+
+    def switchDirection(self):
+        """
+        Changes the direciton of the enemy
+        Args: None
+        Return: None
+        """
+        self.direction = bin.functions.makeOppositeDirections(self.direction)
+
+    def gotHit(self):
+        """
+        used to reduce the health of the enemy's health when it gets hit
+        Args: None
+        Return: (str) alive or dead
+        """
+        self.health -= 10
+        if self.health == 0:
+            return "dead"
+        else:
+            return "alive"

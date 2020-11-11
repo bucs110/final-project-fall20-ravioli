@@ -9,7 +9,7 @@ def randomDirection(count, direction):
     Return: (str) direction
     """
     if count == 0:
-        direction_generation = random.randrange(0, 6)
+        direction_generation = random.randrange(0, 8)
         if direction_generation == 0:
             direction = "up"
         if direction_generation == 1:
@@ -33,7 +33,7 @@ def makeOppositeDirections(direction):
     """
     direction = direction
     if direction == "up":
-        direciton = "down"
+        direction = "down"
     elif direction == "down":
         direction = "up"
     elif direction == "right":
