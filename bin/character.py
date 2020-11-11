@@ -91,7 +91,7 @@ class Character(pygame.sprite.Sprite):
             return "alive"
 
 
-    def knockBack(self, upper_boundry, lower_boundry, right_boundry, left_boundry ):
+    def knockBack(self, upper_boundry, lower_boundry, right_boundry, left_boundry):
         """
         Knocks back the user after being hit
         Args:

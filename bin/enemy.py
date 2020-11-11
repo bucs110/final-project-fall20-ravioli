@@ -29,7 +29,7 @@ class Enemy(pygame.sprite.Sprite):
         """
         speed = 100
         self.direction = bin.functions.randomDirection(self.count, self.direction)
-        #self.direction = "none" ##make the enemy stationary for testing purposes##
+        self.direction = "none" ##make the enemy stationary for testing purposes##
         if self.direction == "up" and self.rect.y > self.upper_boundry:
             self.rect.y -= 1
             self.count += 1
@@ -77,8 +77,41 @@ class Enemy(pygame.sprite.Sprite):
         Args: None
         Return: (str) alive or dead
         """
+        ## add knockback ##
         self.health -= 10
         if self.health == 0:
             return "dead"
         else:
             return "alive"
+
+    def knockBack(self, upper_boundry, lower_boundry, right_boundry, left_boundry, position):
+        """
+        Knocks back the user after being hit
+        Args:
+        upper_boundry --> (int) the upper limit for the character to move
+        lower_boundry --> (int) the lower limit for the character to move
+        right_boundry --> (int) the rightward limit for the character to move
+        left_boundry --> (int) the leftward limit for the character to move
+        Return: None
+        """
+        bounce_back = 75
+
+        self.direction = position[2]
+
+        if self.direction == "up":
+            self.rect.y -= bounce_back
+            if self.rect.y < upper_boundry:
+                self.rect.y = upper_boundry
+        elif self.direction == "down":
+            self.rect.y += bounce_back
+            if self.rect.y > lower_boundry:
+                self.rect.y = lower_boundry
+        elif self.direction == "right":
+            self.rect.x += bounce_back
+            if self.rect.x > right_boundry:
+                self.rect.x = right_boundry
+        elif self.direction == "left":
+            self.rect.x -= bounce_back
+            if self.rect.x < left_boundry:
+                self.rect.x = left_boundry
+        self.direction = "none"
