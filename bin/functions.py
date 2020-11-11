@@ -9,7 +9,7 @@ def randomDirection(count, direction):
     Return: (str) direction
     """
     if count == 0:
-        direction_generation = random.randrange(0, 8)
+        direction_generation = random.randrange(0, 15)
         if direction_generation == 0:
             direction = "up"
         if direction_generation == 1:

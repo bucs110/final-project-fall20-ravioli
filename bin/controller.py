@@ -30,7 +30,7 @@ class Controller:
                 self.exitloop()
 
     def gameloop(self):
-        (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 30, 30)
+        (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
 
         ## EVENT LOOP ##
@@ -61,6 +61,8 @@ class Controller:
                                 enemy_life_status = i.gotHit()
                                 if enemy_life_status == "dead":
                                     i.kill()
+                                if enemy_life_status == "alive":
+                                    i.knockBack(self.upper_boundry, self.lower_boundry, self.right_boundry, self.left_boundry, self.character.givePosition())
                             sword = 0
 
 
@@ -75,7 +77,8 @@ class Controller:
                     if event.key == pygame.K_s:
                         down = False
                     if event.key == pygame.K_SPACE:
-                        self.sword.kill()
+                        pass
+                        #self.sword.kill()
 
             ## ACTUAL CHARACTER MOVEMENT ##
             ##change to elif statements to disable diagnoal movement##
