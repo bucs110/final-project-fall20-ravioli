@@ -28,7 +28,6 @@ This the the screen the player sees while playing the game.
  *![gui design](assets/gui_design_victory.jpg)
  This is the screen the player sees if they win the game.
 
-    * For example, if your program has a start screen, game screen, and game over screen, you should include a wireframe / screenshot / drawing of each one and a short description of the components
 * << You should also have a screenshot of each screen for your final GUI >>
 
 ***        
@@ -40,9 +39,7 @@ This the the screen the player sees while playing the game.
         * url for the module documentation
         * a short description of the module
 * Class Interface Design
-    * << A simple drawing that shows the class relationships in your code (see below for an example). >>
         * ![class diagram](assets/classDiagram.jpg) 
-    * This does not need to be overly detailed, but should show how your code fits into the Model/View/Controller paradigm.
 * Classes
     * Character- moves around, attacks enemies, collects items, interacts with NPCs
     * Enemy- tracks and attacks character
