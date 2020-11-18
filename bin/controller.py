@@ -107,7 +107,7 @@ class Controller:
 
             ##SCREEN UPDATES##
             self.all_sprites.update()
-            self.display.fill((100, 15, 69))
+            self.display.fill((139, 244, 255)) #139 244 255
             self.all_sprites.draw(self.display)
             pygame.display.flip()
 
