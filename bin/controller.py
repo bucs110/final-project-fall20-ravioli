@@ -77,6 +77,8 @@ class Controller:
                         self.STATE = "exit"
                     if event.key == pygame.K_SPACE:
                         self.character.attackMode()
+                        sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
+                        sword_swoosh.play()
                         sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         #print(sword_swing)
                         for e in sword_swing:
