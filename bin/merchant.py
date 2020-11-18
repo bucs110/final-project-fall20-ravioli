@@ -28,5 +28,5 @@ class Merchant(pygame.sprite.Sprite):
             return "upgrade"
         elif type == "health":
             return "health"
-        elif type == "weapons":
-            return "weapons"
+        elif type == "banker":
+            return "banker"
