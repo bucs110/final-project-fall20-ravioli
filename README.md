@@ -44,11 +44,11 @@ This the the screen the player sees while playing the game.
 * Class Interface Design
         * ![class diagram](assets/classDiagram.jpg) 
 * Classes
-    * Character- moves around, attacks enemies, collects items, interacts with NPCs
-    * Enemy- tracks and attacks character
-    * Bank- stores and accumulates the character's money
-    * Merchant- sells items to character
-    * Weapon- Deals damage
+    * Character- This is the player that the user controls. It can move around, get hit by an enemy and lose health, and get knocked back after being hit.
+    * Enemy- This creates the enemies that the character fights. It can move within the boundaries, change direction, get hit and lose health, and get knocked back after being hit.
+    * Functions- This contains two methods- randomDirection determines if the enemy is finished walking and determines a new direction, and makeOppositeDirection changes the direction that the character or enemy is walking in to its opposite direction.
+    * Melee- This creates the sword weapon which deals melee damage to the enemies.
+    * Controller- This initializes the screen and creates sprite groups for all of the sprites and just the enemies. It establishes the key movements of "w," "a," "s," "d," and the spacebar, which signals for the sword to strike. This allows the enemies to get hit if the rectangles of the sword and the enemy overlap, and it allows the enemies to die. Also, it allows for the detection of the player being hit by the enemies.  If the player is hit, it loses health, and either stays alive and is knocked back or dies.
 
 ***
 
