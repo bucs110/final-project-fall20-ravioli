@@ -58,7 +58,12 @@ class Controller:
                     if event.key == pygame.K_LCTRL:
                         self.STATE = "exit"
                     if event.key == pygame.K_SPACE:
-                        pass
+                        self.character.attackMode()
+                        sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
+                        #print(sword_swing)
+                        for e in sword_swing:
+                            e.gotHit()
+
 
 
                 if event.type == pygame.KEYUP:

@@ -19,6 +19,7 @@ class Character(pygame.sprite.Sprite):
         self.STATE = "movement"
 
 
+        self.hit_ratio = 1.0
         self.health = 100
         self.cooldown_timer = 1500 ## ~5 seconds ##
 
@@ -119,6 +120,14 @@ class Character(pygame.sprite.Sprite):
         Return: (touple) the characters position and direction
         """
         return (self.rect.x, self.rect.y, self.direction)
+
+    def attackMode(self):
+        """
+        changes the state of the character to attack
+        Args: none
+        Return: None
+        """
+        self.state = "attack"
 
     def update(self):
         """

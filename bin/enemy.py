@@ -73,9 +73,8 @@ class Enemy(pygame.sprite.Sprite):
         ## add knockback ##
         self.health -= 10
         if self.health == 0:
-            return "dead"
-        else:
-            return "alive"
+            self.kill()
+
 
     def knockBack(self, upper_boundry, lower_boundry, right_boundry, left_boundry, position):
         """
