@@ -9,10 +9,11 @@ class Controller:
         ##INITIALIZE SCREEN, SPRITES, AND STATE##
         self.display = pygame.display.set_mode((1500, 800), pygame.RESIZABLE)
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
+        self.boundaries = (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry)
 
-        self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png")
-        self.enemy = bin.enemy.Enemy((800, 400), 10, "assets/ramsay.png")
-        self.enemy2 = bin.enemy.Enemy((400, 400), 50, "assets/ramsay.png")
+        self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
+        self.enemy = bin.enemy.Enemy((800, 400), 10, "assets/ramsay.png", self.boundaries)
+        self.enemy2 = bin.enemy.Enemy((400, 400), 50, "assets/ramsay.png", self.boundaries)
 
 
         self.STATE = "gameplay"
@@ -62,6 +63,7 @@ class Controller:
                         sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         #print(sword_swing)
                         for e in sword_swing:
+                            e.knockBack(self.character.direction)
                             e.gotHit()
 
 
@@ -83,13 +85,13 @@ class Controller:
             ## ACTUAL CHARACTER MOVEMENT ##
             ##change to elif statements to disable diagnoal movement##
             if up:
-                self.character.moveUp(self.upper_boundry)
+                self.character.moveUp()
             if down:
-                self.character.moveDown(self.lower_boundry)
+                self.character.moveDown()
             if left:
-                self.character.moveLeft(self.left_boundry)
+                self.character.moveLeft()
             if right:
-                self.character.moveRight(self.right_boundry)
+                self.character.moveRight()
 
             ## DETECTING IF PLAYER IS HIT AND DOING DAMAGE ##
             player_get_hit = pygame.sprite.spritecollide(self.character, self.all_enemies, False)
@@ -99,7 +101,7 @@ class Controller:
                     self.character.kill()
                     self.STATE = "exit"
                 elif player_life == "alive":
-                    self.character.knockBack(self.upper_boundry, self.lower_boundry, self.right_boundry, self.left_boundry) ##maybe do some editing to make smoother##
+                    self.character.knockBack() ##maybe do some editing to make smoother##
 
 
             ## This should make enemies turn around when they collide but its untested, bad, and not really needed ##

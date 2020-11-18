@@ -3,12 +3,13 @@ import random
 import bin.functions
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, position, health, filename):
+    def __init__(self, position, health, filename, boundaries):
         """
         Initializes the enemies for the user
         Args:
         position --> (touple) the enemy's inital coordinates
         filename --> (str) the name of the file for the enemy image
+        boundaries --> (touple) the world boundaries for the screen
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(filename)
@@ -19,8 +20,8 @@ class Enemy(pygame.sprite.Sprite):
         self.direction = "up"
         self.health = health
         self.reward_money = health
-        ## I hate to redefine these but its the easiest way to do this##
-        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
+        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
+
 
     def update(self):
         """
@@ -76,34 +77,31 @@ class Enemy(pygame.sprite.Sprite):
             self.kill()
 
 
-    def knockBack(self, upper_boundry, lower_boundry, right_boundry, left_boundry, position):
+    def knockBack(self, direction):
         """
         Knocks back the user after being hit
         Args:
-        upper_boundry --> (int) the upper limit for the character to move
-        lower_boundry --> (int) the lower limit for the character to move
-        right_boundry --> (int) the rightward limit for the character to move
-        left_boundry --> (int) the leftward limit for the character to move
+        direction --> (str) the character's direction
         Return: None
         """
         bounce_back = 75
 
-        self.direction = position[2]
+        self.direction = direction
 
         if self.direction == "up":
             self.rect.y -= bounce_back
-            if self.rect.y < upper_boundry:
-                self.rect.y = upper_boundry
+            if self.rect.y < self.upper_boundry:
+                self.rect.y = self.upper_boundry
         elif self.direction == "down":
             self.rect.y += bounce_back
-            if self.rect.y > lower_boundry:
-                self.rect.y = lower_boundry
+            if self.rect.y > self.lower_boundry:
+                self.rect.y = self.lower_boundry
         elif self.direction == "right":
             self.rect.x += bounce_back
-            if self.rect.x > right_boundry:
-                self.rect.x = right_boundry
+            if self.rect.x > self.right_boundry:
+                self.rect.x = self.right_boundry
         elif self.direction == "left":
             self.rect.x -= bounce_back
-            if self.rect.x < left_boundry:
-                self.rect.x = left_boundry
-        self.direction = "none"
+            if self.rect.x < self.left_boundry:
+                self.rect.x = self.left_boundry
+        #self.direction = "none"
