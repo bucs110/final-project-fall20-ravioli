@@ -42,7 +42,7 @@ This the the screen the player sees while playing the game.
 		* Pygame is a framework library that handles the view of a program and is designed for writing video games.
 
 * Class Interface Design
-        * ![class diagram](assets/classDiagram.jpg) 
+        * ![class diagram](assets/class_diagram.jpg) 
 * Classes
     * Character- This is the player that the user controls. It can move around, get hit by an enemy and lose health, and get knocked back after being hit.
     * Enemy- This creates the enemies that the character fights. It can move within the boundaries, change direction, get hit and lose health, and get knocked back after being hit.
