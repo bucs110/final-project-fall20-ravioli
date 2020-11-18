@@ -22,11 +22,11 @@ class Merchant(pygame.sprite.Sprite):
         """
         sets up the exchange between the merchant and the player
         Args: type --> (str) the type of merchant
-        Return: None
+        Return: (str) upgrade, health, or weapons
         """
         if type == "upgrade":
-            pass
+            return "upgrade"
         elif type == "health":
-            pass
+            return "health"
         elif type == "weapons":
-            pass
+            return "weapons"
