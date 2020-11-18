@@ -20,7 +20,7 @@ class Controller:
         ##ESTABLISH SPRITE GROUPS##
         self.all_sprites = pygame.sprite.Group( (self.character, self.enemy, self.enemy2) )
         self.all_enemies = pygame.sprite.Group(self.enemy, self.enemy2)
-        self.weapons = ()
+        self.weapons = pygame.sprite.Group()
 
     def mainloop(self):
         while True:
@@ -52,19 +52,7 @@ class Controller:
                     if event.key == pygame.K_LCTRL:
                         self.STATE = "exit"
                     if event.key == pygame.K_SPACE:
-                        if sword == sword_cooldown:
-                            self.sword = bin.melee.Melee(70, "assets/resizedd_penne_sword_vertical.png")
-                            self.sword.add((self.weapons, self.all_sprites))
-
-                            self.sword.strike(self.character.givePosition())
-                            enemy_got_hit = pygame.sprite.spritecollide(self.sword, self.all_enemies, False)
-                            for i in enemy_got_hit:
-                                enemy_life_status = i.gotHit()
-                                if enemy_life_status == "dead":
-                                    i.kill()
-                                if enemy_life_status == "alive":
-                                    i.knockBack(self.upper_boundry, self.lower_boundry, self.right_boundry, self.left_boundry, self.character.givePosition())
-                            sword = 0
+                        pass
 
 
                 if event.type == pygame.KEYUP:
@@ -79,7 +67,7 @@ class Controller:
                         down = False
                     if event.key == pygame.K_SPACE:
                         pass
-                        #self.sword.kill()
+
 
             ## ACTUAL CHARACTER MOVEMENT ##
             ##change to elif statements to disable diagnoal movement##
@@ -117,14 +105,9 @@ class Controller:
             self.all_sprites.draw(self.display)
             pygame.display.flip()
 
-            ## Check how long the sword has been out and kill over 30 ticks ##
-            if sword < sword_cooldown:
-                sword += 1
-                if sword == sword_cooldown:
-                    self.sword.kill()
 
             ##SET FPS##
-            clock.tick(500)
+            clock.tick(250)
 
     def exitloop(self):
         pygame.quit()

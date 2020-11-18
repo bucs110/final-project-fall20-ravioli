@@ -67,16 +67,6 @@ class Character(pygame.sprite.Sprite):
             self.rect.x -= 1
         self.direction = "left"
 
-
-    def draw(self, screen):
-        """
-        Used to draw and update the enemy class
-        Args: None
-        Return: None
-        """
-        screen.blit(self.character.image, (self.character.rect.x, self.character.rect.y))
-
-
     def gotHit(self):
         """
         used to reduce the health of the character when it gets hit

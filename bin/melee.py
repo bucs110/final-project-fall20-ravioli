@@ -1,6 +1,9 @@
 import pygame
 import bin.functions
 
+
+### THIS CLASS IS PRETTY OBSOLETE ###
+
 class Melee(pygame.sprite.Sprite):
     def __init__(self, sword_length, filename):
         """
@@ -58,16 +61,5 @@ class Melee(pygame.sprite.Sprite):
         Args: None
         Return: None
         """
-
-
-
-
-
-
-
-
-
-
-
 
         ##give me space thanks##

@@ -18,6 +18,7 @@ class Enemy(pygame.sprite.Sprite):
         self.count = 0
         self.direction = "up"
         self.health = health
+        self.reward_money = health
         ## I hate to redefine these but its the easiest way to do this##
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
 
@@ -54,14 +55,6 @@ class Enemy(pygame.sprite.Sprite):
             self.count += 1
             if self.count == speed:
                 self.count = 0
-
-    def draw(self, screen):
-        """
-        Used to draw and update the enemy class
-        Args: None
-        Return: None
-        """
-        screen.blit(self.enemy.image, (self.enemy.rect.x, self.enemy.rect.y))
 
     def switchDirection(self):
         """
