@@ -3,9 +3,15 @@ import bin.character
 import bin.enemy
 import bin.functions
 import bin.melee
+import bin.merchant
+import bin.button
 
 class Controller:
     def __init__(self):
+        """
+        Initializes the screen and the main variables
+        args: none
+        """
         ##INITIALIZE SCREEN, SPRITES, AND STATE##
         self.display = pygame.display.set_mode((1500, 800), pygame.RESIZABLE)
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
@@ -14,16 +20,22 @@ class Controller:
         self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
         self.enemy = bin.enemy.Enemy((800, 400), 10, "assets/ramsay.png", self.boundaries)
         self.enemy2 = bin.enemy.Enemy((400, 400), 50, "assets/ramsay.png", self.boundaries)
+        self.merchant_upgrade = bin.merchant.Merchant((200, 200), "assets/merchant.png", "upgrade")
 
 
         self.STATE = "gameplay"
 
         ##ESTABLISH SPRITE GROUPS##
-        self.all_sprites = pygame.sprite.Group( (self.character, self.enemy, self.enemy2) )
+        self.all_sprites = pygame.sprite.Group( (self.character, self.enemy, self.enemy2, self.merchant_upgrade) )
         self.all_enemies = pygame.sprite.Group(self.enemy, self.enemy2)
         self.weapons = pygame.sprite.Group()
 
     def mainloop(self):
+        """
+        Determines which loops of the game should run
+        args: none
+        return: none
+        """
         while True:
             if self.STATE == "menu":
                 pass
@@ -37,6 +49,11 @@ class Controller:
                 pass
 
     def gameloop(self):
+        """
+        Main loop of the gameplay where the character can move and fight
+        Args: none
+        Return: none
+        """
         (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
 
@@ -60,6 +77,8 @@ class Controller:
                         self.STATE = "exit"
                     if event.key == pygame.K_SPACE:
                         self.character.attackMode()
+                        sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
+                        sword_swoosh.play()
                         sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         #print(sword_swing)
                         for e in sword_swing:
@@ -123,5 +142,10 @@ class Controller:
             clock.tick(250)
 
     def exitloop(self):
+        """
+        Closes the game
+        Args: none
+        Return: none
+        """
         pygame.quit()
         exit()
