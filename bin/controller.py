@@ -24,10 +24,16 @@ class Controller:
 
     def mainloop(self):
         while True:
-            if self.STATE == "gameplay":
+            if self.STATE == "menu":
+                pass
+            elif self.STATE == "gameplay":
                 self.gameloop()
             elif self.STATE == "exit":
                 self.exitloop()
+            elif self.STATE == "win_screen":
+                pass
+            elif self.STATE == "lose_screen":
+                pass
 
     def gameloop(self):
         (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 50, 50)
