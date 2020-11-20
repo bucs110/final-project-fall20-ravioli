@@ -104,7 +104,7 @@ class Character(pygame.sprite.Sprite):
         Return: None
         """
         self.STATE = "knockback"
-        self.got_hit_cooldown = 6 * self.animation_rate
+        self.got_hit_cooldown = 5 * self.animation_rate
         self.current_iteration = 0
 
         bounce_back = 75
