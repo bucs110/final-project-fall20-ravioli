@@ -22,7 +22,7 @@ class Controller:
         self.enemy2 = bin.enemy.Enemy((400, 400), 50, "assets/ramsay.png", self.boundaries)
         self.merchant_upgrade = bin.merchant.Merchant((200, 200), "assets/merchant.png", "upgrade")
 
-
+        self.swing = 0
         self.STATE = "gameplay"
 
         ##ESTABLISH SPRITE GROUPS##
@@ -76,15 +76,11 @@ class Controller:
                     if event.key == pygame.K_LCTRL:
                         self.STATE = "exit"
                     if event.key == pygame.K_SPACE:
-                        self.character.attackMode()
-                        sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
-                        sword_swoosh.play()
-                        sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
-                        #print(sword_swing)
-                        for e in sword_swing:
-                            e.knockBack(self.character.direction)
-                            e.gotHit()
-
+                        if self.swing == 0:
+                            self.character.attackMode()
+                            sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
+                            sword_swoosh.play()
+                            self.swing += 1
 
 
                 if event.type == pygame.KEYUP:
@@ -100,6 +96,16 @@ class Controller:
                     if event.key == pygame.K_SPACE:
                         pass
 
+            ## There are a bit of hardcoded values / magic numbers here but I just wanted to get it working ##
+            if self.swing > 0:
+                if self.swing > 10 and self.swing < 12:
+                    sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
+                    for e in sword_swing:
+                        e.knockBack(self.character.direction)
+                        e.gotHit()
+                self.swing += 1
+            if self.swing > 16:
+                self.swing = 0
 
             ## ACTUAL CHARACTER MOVEMENT ##
             ##change to elif statements to disable diagnoal movement##
@@ -143,6 +149,7 @@ class Controller:
 
             ##SET FPS##
             clock.tick(30)
+            #print(self.swing)
 
     def exitloop(self):
         """

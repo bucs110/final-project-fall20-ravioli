@@ -23,14 +23,15 @@ class Character(pygame.sprite.Sprite):
         self.speed = 3
         self.hit_ratio = 1.0
         self.health = 100
-        self.cooldown_timer = 150 ## ~5 seconds ##
         self.attack_cooldown = 0
+        self.got_hit_cooldown = 0
 
         ## animation variables ##
         self.animation_frame = "idleR1.png"
         self.current_iteration = 0
         self.frame = 0
         self.animation_folder = "assets/orangeKnightAnimations/idleR"
+        self.animation_rate = 2
 
     def moveUp(self):
         """
@@ -38,10 +39,11 @@ class Character(pygame.sprite.Sprite):
         Args: none
         Return:None
         """
-        if self.rect.y > self.upper_boundry:
-            self.rect.y -= self.speed
-        self.direction = "up"
-        self.animation_folder = "assets/orangeKnightAnimations/walkU"
+        if self.STATE  == "movement":
+            if self.rect.y > self.upper_boundry:
+                self.rect.y -= self.speed
+            self.direction = "up"
+            self.animation_folder = "assets/orangeKnightAnimations/walkU"
 
 
     def moveDown(self):
@@ -50,10 +52,11 @@ class Character(pygame.sprite.Sprite):
         Args: none
         Return: None
         """
-        if self.rect.y < self.lower_boundry:
-            self.rect.y += self.speed
-        self.direction = "down"
-        self.animation_folder = "assets/orangeKnightAnimations/walkD"
+        if self.STATE  == "movement":
+            if self.rect.y < self.lower_boundry:
+                self.rect.y += self.speed
+            self.direction = "down"
+            self.animation_folder = "assets/orangeKnightAnimations/walkD"
 
     def moveRight(self):
         """
@@ -61,11 +64,11 @@ class Character(pygame.sprite.Sprite):
         Args: none
         Return: None
         """
-
-        if self.rect.x < self.right_boundry:
-            self.rect.x += self.speed
-        self.direction = "right"
-        self.animation_folder = "assets/orangeKnightAnimations/walkR"
+        if self.STATE  == "movement":
+            if self.rect.x < self.right_boundry:
+                self.rect.x += self.speed
+            self.direction = "right"
+            self.animation_folder = "assets/orangeKnightAnimations/walkR"
 
     def moveLeft(self):
         """
@@ -73,10 +76,11 @@ class Character(pygame.sprite.Sprite):
         Args: none
         Return:None
         """
-        if self.rect.x > self.left_boundry:
-            self.rect.x -= self.speed
-        self.direction = "left"
-        self.animation_folder = "assets/orangeKnightAnimations/walkL"
+        if self.STATE  == "movement":
+            if self.rect.x > self.left_boundry:
+                self.rect.x -= self.speed
+            self.direction = "left"
+            self.animation_folder = "assets/orangeKnightAnimations/walkL"
 
     def gotHit(self):
         """
@@ -84,9 +88,8 @@ class Character(pygame.sprite.Sprite):
         Args: None
         Return: (str) alive or dead
         """
-        if self.cooldown_timer == 0:
+        if self.got_hit_cooldown == 0:
             self.health -= 10
-            self.cooldown_timer = 90 ## resets cooldown_timer ~3 seconds ##
         print(str(self.health) + " character")
         if self.health == 0:
             return "dead"
@@ -100,24 +103,33 @@ class Character(pygame.sprite.Sprite):
         Args: None
         Return: None
         """
+        self.STATE = "knockback"
+        self.got_hit_cooldown = 6 * self.animation_rate
+        self.current_iteration = 0
+
         bounce_back = 75
         self.direction = bin.functions.makeOppositeDirections(self.direction)
         if self.direction == "up":
+            self.animation_folder = "assets/orangeKnightAnimations/damageD"
             self.rect.y -= bounce_back
             if self.rect.y < self.upper_boundry:
                 self.rect.y = self.upper_boundry
         elif self.direction == "down":
+            self.animation_folder = "assets/orangeKnightAnimations/damageU"
             self.rect.y += bounce_back
             if self.rect.y > self.lower_boundry:
                 self.rect.y = self.lower_boundry
         elif self.direction == "right":
+            self.animation_folder = "assets/orangeKnightAnimations/damageL"
             self.rect.x += bounce_back
             if self.rect.x > self.right_boundry:
                 self.rect.x = self.right_boundry
         elif self.direction == "left":
+            self.animation_folder = "assets/orangeKnightAnimations/damageR"
             self.rect.x -= bounce_back
             if self.rect.x < self.left_boundry:
                 self.rect.x = self.left_boundry
+        self.direction = bin.functions.makeOppositeDirections(self.direction)
 
     def givePosition(self):
         """
@@ -133,8 +145,9 @@ class Character(pygame.sprite.Sprite):
         Args: none
         Return: None
         """
-        self.state = "attack"
-        self.attack_cooldown = 11
+        self.STATE = "attack"
+        self.current_iteration = 0
+        self.attack_cooldown = 8 * self.animation_rate
         if self.direction == "right":
             self.animation_folder = "assets/orangeKnightAnimations/attackR"
         elif self.direction == "left":
@@ -151,14 +164,15 @@ class Character(pygame.sprite.Sprite):
         Args: None
         Return: None
         """
-        if self.direction == "right":
-            self.animation_folder = "assets/orangeKnightAnimations/idleR"
-        elif self.direction == "left":
-            self.animation_folder = "assets/orangeKnightAnimations/idleL"
-        elif self.direction == "up":
-            self.animation_folder = "assets/orangeKnightAnimations/idleU"
-        elif self.direction == "down":
-            self.animation_folder = "assets/orangeKnightAnimations/idleD"
+        if self.STATE  == "movement":
+            if self.direction == "right":
+                self.animation_folder = "assets/orangeKnightAnimations/idleR"
+            elif self.direction == "left":
+                self.animation_folder = "assets/orangeKnightAnimations/idleL"
+            elif self.direction == "up":
+                self.animation_folder = "assets/orangeKnightAnimations/idleU"
+            elif self.direction == "down":
+                self.animation_folder = "assets/orangeKnightAnimations/idleD"
 
     def update(self):
         """
@@ -166,12 +180,13 @@ class Character(pygame.sprite.Sprite):
         Args: None
         Return: None
         """
-        if self.attack_cooldown == 0:
+        #print(self.attack_cooldown, self.got_hit_cooldown)
+        if self.attack_cooldown == 0 and self.got_hit_cooldown == 0:
             self.STATE = "movement"
 
 
         self.current_iteration = bin.functions.currentIterationChecker(self.current_iteration, self.animation_folder)
-        (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, 2, self.current_iteration, self.frame, self.animation_frame)
+        (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, self.animation_rate, self.current_iteration, self.frame, self.animation_frame)
         self.image = pygame.transform.smoothscale(pygame.image.load(self.animation_folder + "/" + self.animation_frame).convert_alpha(), (100, 100))
         temporary = self.image.get_rect()
         temporary.x = self.rect.x
@@ -181,5 +196,5 @@ class Character(pygame.sprite.Sprite):
         if self.attack_cooldown > 0:
             self.attack_cooldown -= 1
 
-        if self.cooldown_timer > 0:
-            self.cooldown_timer -= 1
+        if self.got_hit_cooldown > 0:
+            self.got_hit_cooldown -= 1
