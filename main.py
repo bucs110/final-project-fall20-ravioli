@@ -3,6 +3,7 @@ import pygame
 import bin.controller
 
 
+
 def main():
     #Create an instance on your controller object
     pygame.init()

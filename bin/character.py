@@ -20,11 +20,17 @@ class Character(pygame.sprite.Sprite):
         self.direction = "right"
         self.STATE = "movement"
 
-
+        self.speed = 3
         self.hit_ratio = 1.0
         self.health = 100
-        self.cooldown_timer = 1500 ## ~5 seconds ##
+        self.cooldown_timer = 150 ## ~5 seconds ##
+        self.attack_cooldown = 0
 
+        ## animation variables ##
+        self.animation_frame = "idleR1.png"
+        self.current_iteration = 0
+        self.frame = 0
+        self.animation_folder = "assets/orangeKnightAnimations/idleR"
 
     def moveUp(self):
         """
@@ -33,8 +39,9 @@ class Character(pygame.sprite.Sprite):
         Return:None
         """
         if self.rect.y > self.upper_boundry:
-            self.rect.y -= 1
+            self.rect.y -= self.speed
         self.direction = "up"
+        self.animation_folder = "assets/orangeKnightAnimations/walkU"
 
 
     def moveDown(self):
@@ -44,9 +51,9 @@ class Character(pygame.sprite.Sprite):
         Return: None
         """
         if self.rect.y < self.lower_boundry:
-            self.rect.y += 1
+            self.rect.y += self.speed
         self.direction = "down"
-
+        self.animation_folder = "assets/orangeKnightAnimations/walkD"
 
     def moveRight(self):
         """
@@ -56,9 +63,9 @@ class Character(pygame.sprite.Sprite):
         """
 
         if self.rect.x < self.right_boundry:
-            self.rect.x += 1
+            self.rect.x += self.speed
         self.direction = "right"
-
+        self.animation_folder = "assets/orangeKnightAnimations/walkR"
 
     def moveLeft(self):
         """
@@ -67,8 +74,9 @@ class Character(pygame.sprite.Sprite):
         Return:None
         """
         if self.rect.x > self.left_boundry:
-            self.rect.x -= 1
+            self.rect.x -= self.speed
         self.direction = "left"
+        self.animation_folder = "assets/orangeKnightAnimations/walkL"
 
     def gotHit(self):
         """
@@ -78,7 +86,7 @@ class Character(pygame.sprite.Sprite):
         """
         if self.cooldown_timer == 0:
             self.health -= 10
-            self.cooldown_timer = 900 ## resets cooldown_timer ~3 seconds ##
+            self.cooldown_timer = 90 ## resets cooldown_timer ~3 seconds ##
         print(str(self.health) + " character")
         if self.health == 0:
             return "dead"
@@ -126,6 +134,31 @@ class Character(pygame.sprite.Sprite):
         Return: None
         """
         self.state = "attack"
+        self.attack_cooldown = 11
+        if self.direction == "right":
+            self.animation_folder = "assets/orangeKnightAnimations/attackR"
+        elif self.direction == "left":
+            self.animation_folder = "assets/orangeKnightAnimations/attackL"
+        elif self.direction == "up":
+            self.animation_folder = "assets/orangeKnightAnimations/attackU"
+        elif self.direction == "down":
+            self.animation_folder = "assets/orangeKnightAnimations/attackD"
+
+
+    def idleMode(self):
+        """
+        Changes the animation folder if the character is idle
+        Args: None
+        Return: None
+        """
+        if self.direction == "right":
+            self.animation_folder = "assets/orangeKnightAnimations/idleR"
+        elif self.direction == "left":
+            self.animation_folder = "assets/orangeKnightAnimations/idleL"
+        elif self.direction == "up":
+            self.animation_folder = "assets/orangeKnightAnimations/idleU"
+        elif self.direction == "down":
+            self.animation_folder = "assets/orangeKnightAnimations/idleD"
 
     def update(self):
         """
@@ -133,5 +166,20 @@ class Character(pygame.sprite.Sprite):
         Args: None
         Return: None
         """
+        if self.attack_cooldown == 0:
+            self.STATE = "movement"
+
+
+        self.current_iteration = bin.functions.currentIterationChecker(self.current_iteration, self.animation_folder)
+        (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, 2, self.current_iteration, self.frame, self.animation_frame)
+        self.image = pygame.transform.smoothscale(pygame.image.load(self.animation_folder + "/" + self.animation_frame).convert_alpha(), (100, 100))
+        temporary = self.image.get_rect()
+        temporary.x = self.rect.x
+        temporary.y = self.rect.y
+        self.rect = temporary
+
+        if self.attack_cooldown > 0:
+            self.attack_cooldown -= 1
+
         if self.cooldown_timer > 0:
             self.cooldown_timer -= 1

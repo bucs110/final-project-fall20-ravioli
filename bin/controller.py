@@ -111,6 +111,9 @@ class Controller:
                 self.character.moveLeft()
             if right:
                 self.character.moveRight()
+            if not up and not down and not left and not right:
+                self.character.idleMode()
+
 
             ## DETECTING IF PLAYER IS HIT AND DOING DAMAGE ##
             player_get_hit = pygame.sprite.spritecollide(self.character, self.all_enemies, False)
@@ -139,7 +142,7 @@ class Controller:
 
 
             ##SET FPS##
-            clock.tick(250)
+            clock.tick(30)
 
     def exitloop(self):
         """
