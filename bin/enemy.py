@@ -73,6 +73,8 @@ class Enemy(pygame.sprite.Sprite):
         """
         ## add knockback ##
         self.health -= 10
+        enemy_hit_sound = pygame.mixer.Sound("assets/sounds/enemyHitSound.wav")
+        enemy_hit_sound.play()
         if self.health == 0:
             self.kill()
 
