@@ -5,6 +5,8 @@ import bin.functions
 import bin.melee
 import bin.merchant
 import bin.button
+import os
+import time
 
 class Controller:
     def __init__(self):
@@ -22,7 +24,10 @@ class Controller:
 
         self.swing = 0
         self.STATE = "gameplay"
-        self.wave = "etc/wave1.txt"
+        self.current_wave = 0
+        self.wave_list = os.listdir("etc")
+        self.wave = "etc/" + str(self.wave_list[self.current_wave])
+        print(self.wave_list)
         self.enemy_spawn_time = 100
         self.enemy_number = 0
 
@@ -30,6 +35,7 @@ class Controller:
         self.all_sprites = pygame.sprite.Group( (self.character, self.merchant_upgrade) )
         self.all_enemies = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
+        self.wave_reset = pygame.sprite.Group()
 
     def mainloop(self):
         """
@@ -44,9 +50,11 @@ class Controller:
                 self.gameloop()
             elif self.STATE == "exit":
                 self.exitloop()
-            elif self.STATE == "win_screen":
+            elif self.STATE == "nextWave":
+                self.nextWave()
+            elif self.STATE == "winScreen":
                 pass
-            elif self.STATE == "lose_screen":
+            elif self.STATE == "loseScreen":
                 pass
 
     def gameloop(self):
@@ -55,7 +63,7 @@ class Controller:
         Args: none
         Return: none
         """
-        (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 50, 50)
+        (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
         with open(self.wave, 'r') as file:
             information = file.readlines()
@@ -85,6 +93,8 @@ class Controller:
                             sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
                             sword_swoosh.play()
                             self.swing += 1
+                    if event.key == pygame.K_e:
+                        reset_click = True
 
 
                 if event.type == pygame.KEYUP:
@@ -99,6 +109,8 @@ class Controller:
                         down = False
                     if event.key == pygame.K_SPACE:
                         pass
+                    if event.key == pygame.K_e:
+                        reset_click = False
 
             ## SPAWNING ENEMIES ##
             if self.enemy_spawn_time > 0:
@@ -110,6 +122,21 @@ class Controller:
                 self.enemy_spawn_time = 100
                 self.enemy_number += 1
             #print(self.enemy_spawn_time, self.total_wave_enemies, self.enemy_number)
+
+            ## WAVE CHECKER ##
+            if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
+                if len(self.wave_reset) == 0:
+                    self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png")
+                    self.all_sprites.add(self.wave_lever)
+                    self.wave_reset.add(self.wave_lever)
+                else:
+                    if reset_click:
+                        reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
+                        if reset_contact:
+                            ##ADVANCE TO NEXT WAVE##
+                            self.wave_lever.toggle("assets/waveLeverFlipped.png")
+                            self.enemy_number = 0
+                            self.STATE = "nextWave"
 
 
             ## There are a bit of hardcoded values / magic numbers here but I just wanted to get it working ##
@@ -160,6 +187,22 @@ class Controller:
             ##SET FPS##
             clock.tick(30)
             #print(self.swing)
+
+    def nextWave(self):
+        """
+        In-between screen that changes to the next wave
+        args: none
+        return: none
+        """
+        time.sleep(1)
+        self.wave_lever.kill()
+        if self.current_wave < len(self.wave_list):
+            self.current_wave += 1
+            self.wave = "etc/" + str(self.wave_list[self.current_wave])
+            self.STATE = "gameplay"
+        elif self.current_wave == len(self.wave_list):
+            self.STATE == "winScreen"
+
 
     def exitloop(self):
         """

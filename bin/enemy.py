@@ -20,7 +20,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = positionY
         self.count = 0
         self.direction = "up"
-        self.speed = 4
+        self.speed = 3
         self.health = health
         self.reward_money = health
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
@@ -32,7 +32,7 @@ class Enemy(pygame.sprite.Sprite):
         Args: None
         Return:
         """
-        speed = 100
+        speed = 75
         self.direction = bin.functions.randomDirection(self.count, self.direction)
         #self.direction = "none" ##make the enemy stationary for testing purposes##
         if self.direction == "up" and self.rect.y > self.upper_boundry:
