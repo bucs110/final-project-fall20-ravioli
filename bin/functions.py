@@ -1,5 +1,7 @@
 import random
 import os
+import pygame
+import bin.enemy
 
 def randomDirection(count, direction):
     """
@@ -10,7 +12,7 @@ def randomDirection(count, direction):
     Return: (str) direction
     """
     if count == 0:
-        direction_generation = random.randrange(0, 15)
+        direction_generation = random.randrange(0, 6)
         if direction_generation == 0:
             direction = "up"
         if direction_generation == 1:
@@ -78,3 +80,30 @@ def currentIterationChecker(current_iteration, folder):
     if current_iteration > (len(os.listdir(folder)) - 1):
         current_iteration = 0
     return current_iteration
+
+def spawnEnemy(filename, boundaries, enemy_number):
+    """
+    Takes the wave values from a file a saves them into variables
+    Args:
+    filename --> (str) the name of the text file with the wave information
+    boundaries --> (touple) pixel limitations for the enemy movement
+    enemy_number --> (int) the enemy's place in the wave lineup
+    Return: (touple) --> information about the wave enemies
+    """
+    with open(filename, 'r') as file:
+        wave_information = file.readlines()
+
+    type_line = (enemy_number * 6) + 1
+    coordinateX_line = (enemy_number * 6) + 2
+    coordinateY_line = (enemy_number * 6) + 3
+    health_line = (enemy_number * 6) + 4
+    png_line = (enemy_number * 6) + 5
+
+    type = wave_information[type_line].rstrip("\n").split(' : ')
+    coordinateX = wave_information[coordinateX_line].rstrip("\n").split(' : ')
+    coordinateY = wave_information[coordinateY_line].rstrip("\n").split(' : ')
+    health = wave_information[health_line].rstrip("\n").split(' : ')
+    png = wave_information[png_line].rstrip("\n").split(' : ')
+
+    enemy = bin.enemy.Enemy(type[1], int(coordinateX[1]), int(coordinateY[1]), int(health[1]), png[1], boundaries)
+    return enemy

@@ -14,20 +14,21 @@ class Controller:
         """
         ##INITIALIZE SCREEN, SPRITES, AND STATE##
         self.display = pygame.display.set_mode((1500, 800), pygame.RESIZABLE)
-        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
+        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (50, 700, 50, 1400)
         self.boundaries = (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry)
 
         self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
-        self.enemy = bin.enemy.Enemy((800, 400), 10, "assets/ramsay.png", self.boundaries)
-        self.enemy2 = bin.enemy.Enemy((400, 400), 50, "assets/ramsay.png", self.boundaries)
         self.merchant_upgrade = bin.merchant.Merchant((200, 200), "assets/merchant.png", "upgrade")
 
         self.swing = 0
         self.STATE = "gameplay"
+        self.wave = "etc/wave1.txt"
+        self.enemy_spawn_time = 100
+        self.enemy_number = 0
 
         ##ESTABLISH SPRITE GROUPS##
-        self.all_sprites = pygame.sprite.Group( (self.character, self.enemy, self.enemy2, self.merchant_upgrade) )
-        self.all_enemies = pygame.sprite.Group(self.enemy, self.enemy2)
+        self.all_sprites = pygame.sprite.Group( (self.character, self.merchant_upgrade) )
+        self.all_enemies = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
 
     def mainloop(self):
@@ -56,6 +57,9 @@ class Controller:
         """
         (up, down, left, right, sword, sword_cooldown) = (False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
+        with open(self.wave, 'r') as file:
+            information = file.readlines()
+            self.total_wave_enemies = len(information) // 6
 
         ## EVENT LOOP ##
         while self.STATE == "gameplay":
@@ -96,6 +100,18 @@ class Controller:
                     if event.key == pygame.K_SPACE:
                         pass
 
+            ## SPAWNING ENEMIES ##
+            if self.enemy_spawn_time > 0:
+                self.enemy_spawn_time -= 1
+            elif self.enemy_spawn_time == 0 and self.enemy_number != self.total_wave_enemies:
+                self.enemy = bin.functions.spawnEnemy(self.wave, self.boundaries, self.enemy_number)
+                self.all_enemies.add(self.enemy)
+                self.all_sprites.add(self.enemy)
+                self.enemy_spawn_time = 100
+                self.enemy_number += 1
+            #print(self.enemy_spawn_time, self.total_wave_enemies, self.enemy_number)
+
+
             ## There are a bit of hardcoded values / magic numbers here but I just wanted to get it working ##
             if self.swing > 0:
                 if self.swing > 10 and self.swing < 12:
@@ -132,14 +148,6 @@ class Controller:
                     self.character.knockBack() ##maybe do some editing to make smoother##
                     character_hit_sound = pygame.mixer.Sound("assets/sounds/playerHit.wav")
                     character_hit_sound.play()
-
-
-            ## This should make enemies turn around when they collide but its untested, bad, and not really needed ##
-            enemy_collision = pygame.sprite.groupcollide(self.all_enemies, self.all_enemies, False, False)
-            if len(enemy_collision) >= 4:
-                for i in enemy_collision:
-                    i.switchDirection()
-
 
 
             ##SCREEN UPDATES##

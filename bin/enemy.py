@@ -3,21 +3,24 @@ import random
 import bin.functions
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, position, health, filename, boundaries):
+    def __init__(self, type, positionX, positionY, health, filename, boundaries):
         """
         Initializes the enemies for the user
         Args:
-        position --> (touple) the enemy's inital coordinates
+        type --> (str) the given type for an enemy ## NOT FULLY IMPLEMENTED YET ##
+        positionX --> (int) the enemy's inital X coordinate
+        positionY --> (int) the enemy's inital Y coordinate
         filename --> (str) the name of the file for the enemy image
         boundaries --> (touple) the world boundaries for the screen
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(filename)
         self.rect = self.image.get_rect()
-        self.rect.x = position[0]
-        self.rect.y = position[1]
+        self.rect.x = positionX
+        self.rect.y = positionY
         self.count = 0
         self.direction = "up"
+        self.speed = 4
         self.health = health
         self.reward_money = health
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
@@ -31,29 +34,29 @@ class Enemy(pygame.sprite.Sprite):
         """
         speed = 100
         self.direction = bin.functions.randomDirection(self.count, self.direction)
-        self.direction = "none" ##make the enemy stationary for testing purposes##
+        #self.direction = "none" ##make the enemy stationary for testing purposes##
         if self.direction == "up" and self.rect.y > self.upper_boundry:
-            self.rect.y -= 1
+            self.rect.y -= self.speed
             self.count += 1
             if self.count == speed:
                 self.count = 0
         if self.direction == "down" and self.rect.y < self.lower_boundry:
-            self.rect.y += 1
+            self.rect.y += self.speed
             self.count += 1
             if self.count == speed:
                 self.count = 0
         if self.direction == "right" and self.rect.x < self.right_boundry:
-            self.rect.x += 1
+            self.rect.x += self.speed
             self.count += 1
             if self.count == speed:
                 self.count = 0
         if self.direction == "left" and self.rect.x > self.left_boundry:
-            self.rect.x -= 1
+            self.rect.x -= self.speed
             self.count += 1
             if self.count == speed:
                 self.count = 0
         if self.direction == "none":
-            self.count += 1
+            self.count += self.speed
             if self.count == speed:
                 self.count = 0
 
