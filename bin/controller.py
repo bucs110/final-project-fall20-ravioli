@@ -42,9 +42,9 @@ class Controller:
         self.sale_items = pygame.sprite.Group()
 
         ##ESTALBISH IMPORTANT TEXT##
-        self.health_font = pygame.font.SysFont('Times New Roman', 50)
-        self.money_font = pygame.font.SysFont('Times New Roman', 50)
-        self.wave_font = pygame.font.SysFont('Times New Roman', 50)
+        self.health_font = pygame.font.Font('assets/customFont.ttf', 50)
+        self.money_font = pygame.font.Font('assets/customFont.ttf', 50)
+        self.wave_font = pygame.font.Font('assets/customFont.ttf', 50)
 
     def mainloop(self):
         """
