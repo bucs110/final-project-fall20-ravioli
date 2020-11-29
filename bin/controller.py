@@ -147,6 +147,8 @@ class Controller:
             ## WAVE CHECKER ##
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
+                    next_wave_sound = pygame.mixer.Sound("assets/sounds/endRoundSound.wav")
+                    next_wave_sound.play()
                     self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
                     self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
                     self.health_merchant = bin.merchant.Merchant((600, 150), "assets/heth.png", "health")
@@ -158,8 +160,7 @@ class Controller:
                         reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         if reset_contact:
                             ##ADVANCE TO NEXT WAVE##
-                            next_wave_sound = pygame.mixer.Sound("assets/sounds/endRoundSound.wav")
-                            next_wave_sound.play()
+
                             self.wave_lever.toggle("assets/waveLeverFlipped.png")
                             self.enemy_number = 0
                             self.STATE = "nextWave"
