@@ -45,6 +45,7 @@ class Controller:
         self.health_font = pygame.font.Font('assets/customFont.ttf', 50)
         self.money_font = pygame.font.Font('assets/customFont.ttf', 50)
         self.wave_font = pygame.font.Font('assets/customFont.ttf', 50)
+        self.complete_font = pygame.font.Font('assets/customFont.ttf', 50)
 
     def mainloop(self):
         """
@@ -77,6 +78,10 @@ class Controller:
         with open(self.wave, 'r') as file:
             information = file.readlines()
             self.total_wave_enemies = len(information) // 6
+
+        if len(self.merchants) == 0:
+            print("got here")
+            wave_complete_display = self.complete_font.render("", False, (255, 255, 0))
 
         ## EVENT LOOP ##
         while self.STATE == "gameplay":
@@ -147,8 +152,16 @@ class Controller:
             ## WAVE CHECKER ##
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
+                    ## WAVE ENDING ##
+                    wave_complete_display = self.complete_font.render("Wave " + str(self.current_wave + 1) + " Complete!", False, (255, 255, 0))
+                    self.display.blit(wave_complete_display, (575, 200))
+                    pygame.display.flip()
                     next_wave_sound = pygame.mixer.Sound("assets/sounds/endRoundSound.wav")
                     next_wave_sound.play()
+                    time.sleep(5)
+
+                    wave_complete_display = self.complete_font.render("Walk up to merchants and click the buttons to upgrade.", False, (255, 255, 0))
+
                     self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
                     self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
                     self.health_merchant = bin.merchant.Merchant((600, 150), "assets/heth.png", "health")
@@ -251,6 +264,7 @@ class Controller:
             self.display.blit(health_display, (210,0))
             self.display.blit(money_display, (610,0))
             self.display.blit(wave_display, (1010,0))
+            self.display.blit(wave_complete_display, (300, 730))
 
             self.all_sprites.draw(self.display)
             pygame.display.flip()

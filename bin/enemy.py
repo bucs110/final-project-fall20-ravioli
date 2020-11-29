@@ -23,6 +23,7 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 3
         self.health = health
         self.reward_money = health
+        self.damage = 5
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
 
         self.type = type
@@ -80,10 +81,10 @@ class Enemy(pygame.sprite.Sprite):
         Return: (str) alive or dead
         """
         ## add knockback ##
-        self.health -= 10
+        self.health -= self.damage
         enemy_hit_sound = pygame.mixer.Sound("assets/sounds/enemyHitSound.wav")
         enemy_hit_sound.play()
-        if self.health == 0:
+        if self.health <= 0:
             return "dead"
 
 
