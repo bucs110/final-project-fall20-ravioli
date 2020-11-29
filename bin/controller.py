@@ -263,7 +263,7 @@ class Controller:
         args: none
         return: none
         """
-        time.sleep(1)
+        time.sleep(.5)
         for e in self.merchants:
             e.kill()
         self.wave_lever.kill()
