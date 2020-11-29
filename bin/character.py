@@ -25,6 +25,7 @@ class Character(pygame.sprite.Sprite):
         self.health = 100
         self.attack_cooldown = 0
         self.got_hit_cooldown = 0
+        self.total_money = 0 
 
         ## animation variables ##
         self.animation_frame = "idleR1.png"

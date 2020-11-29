@@ -34,7 +34,7 @@ class Enemy(pygame.sprite.Sprite):
         """
         speed = 75
         self.direction = bin.functions.randomDirection(self.count, self.direction)
-        #self.direction = "none" ##make the enemy stationary for testing purposes##
+        self.direction = "none" ##make the enemy stationary for testing purposes##
         if self.direction == "up" and self.rect.y > self.upper_boundry:
             self.rect.y -= self.speed
             self.count += 1
@@ -79,7 +79,7 @@ class Enemy(pygame.sprite.Sprite):
         enemy_hit_sound = pygame.mixer.Sound("assets/sounds/enemyHitSound.wav")
         enemy_hit_sound.play()
         if self.health == 0:
-            self.kill()
+            return "dead"
 
 
     def knockBack(self, direction):

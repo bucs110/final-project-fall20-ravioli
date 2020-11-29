@@ -14,9 +14,11 @@ class Controller:
         Initializes the screen and the main variables
         args: none
         """
+
+        pygame.font.init()
         ##INITIALIZE SCREEN, SPRITES, AND STATE##
         self.display = pygame.display.set_mode((1500, 800), pygame.RESIZABLE)
-        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (50, 700, 50, 1400)
+        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
         self.boundaries = (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry)
 
         self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
@@ -36,6 +38,11 @@ class Controller:
         self.all_enemies = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
         self.wave_reset = pygame.sprite.Group()
+
+        ##ESTALBISH IMPORTANT TEXT##
+        self.health_font = pygame.font.SysFont('Times New Roman', 50)
+        self.money_font = pygame.font.SysFont('Times New Roman', 50)
+        self.wave_font = pygame.font.SysFont('Times New Roman', 50)
 
     def mainloop(self):
         """
@@ -145,7 +152,10 @@ class Controller:
                     sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                     for e in sword_swing:
                         e.knockBack(self.character.direction)
-                        e.gotHit()
+                        if e.gotHit() == "dead":
+                            self.character.total_money += e.reward_money
+                            e.kill()
+                        print(self.character.total_money)
                 self.swing += 1
             if self.swing > 16:
                 self.swing = 0
@@ -177,9 +187,20 @@ class Controller:
                     character_hit_sound.play()
 
 
+            ##TEXT UPDATES##
+            health_display = self.health_font.render("Health: " + str(self.character.health), False, (255, 14, 14))
+            money_display = self.health_font.render("Money: " + str(self.character.total_money), False, (24, 188, 40))
+            wave_display = self.health_font.render("Wave: " + str(self.current_wave + 1), False, (255, 255, 255))
+
+
             ##SCREEN UPDATES##
             self.all_sprites.update()
-            self.display.fill((139, 244, 255)) #139 244 255
+            self.display.fill((0, 0, 0)) #139 244 255
+
+            self.display.blit(health_display, (210,0))
+            self.display.blit(money_display, (610,0))
+            self.display.blit(wave_display, (1010,0))
+
             self.all_sprites.draw(self.display)
             pygame.display.flip()
 
@@ -196,7 +217,7 @@ class Controller:
         """
         time.sleep(1)
         self.wave_lever.kill()
-        if self.current_wave < len(self.wave_list):
+        if self.current_wave + 1 < len(self.wave_list):
             self.current_wave += 1
             self.wave = "etc/" + str(self.wave_list[self.current_wave])
             self.STATE = "gameplay"
