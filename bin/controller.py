@@ -158,6 +158,8 @@ class Controller:
                         reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         if reset_contact:
                             ##ADVANCE TO NEXT WAVE##
+                            next_wave_sound = pygame.mixer.Sound("assets/sounds/endRoundSound.wav")
+                            next_wave_sound.play()
                             self.wave_lever.toggle("assets/waveLeverFlipped.png")
                             self.enemy_number = 0
                             self.STATE = "nextWave"
