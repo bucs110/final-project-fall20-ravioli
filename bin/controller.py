@@ -247,7 +247,7 @@ class Controller:
                     self.STATE = "exit"
                 elif player_life == "alive":
                     self.character.knockBack() ##maybe do some editing to make smoother##
-                    character_hit_sound = pygame.mixer.Sound("assets/sounds/playerHit.wav")
+                    character_hit_sound = pygame.mixer.Sound("assets/sounds/playerHitSound.wav")
                     character_hit_sound.play()
 
 
