@@ -1,15 +1,17 @@
 import pygame
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, position, filename, use):
+    def __init__(self, position, filename, use, size):
         """
         initialzes a button object
         args:
         position --> (touple) the buttons location on the screen
         filename --> (str) the file for the png of the button
+        use --> (str) a string for what the button is used for
+        size --> (touple) the size for the button
         """
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (50,50))
+        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), size)
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
         self.rect.y = position[1]
@@ -21,7 +23,7 @@ class Button(pygame.sprite.Sprite):
         args: filename --> (str) the name of the file for the toggle png
         return: none
         """
-        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (50,50))
+        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), size)
         temporary = self.image.get_rect()
         temporary.x = self.rect.x
         temporary.y = self.rect.y

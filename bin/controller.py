@@ -147,7 +147,7 @@ class Controller:
             ## WAVE CHECKER ##
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
-                    self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null")
+                    self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
                     self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
                     self.health_merchant = bin.merchant.Merchant((600, 150), "assets/heth.png", "health")
                     self.all_sprites.add(self.wave_lever, self.upgrade_merchant, self.health_merchant)
@@ -173,7 +173,7 @@ class Controller:
                             if self.sale_items:
                                 pass
                             elif self.character.upgrade_level == 1:
-                                self.tier_ii_upgrade = bin.button.Button((300, 100), "assets/upgrade.png", "upgrade1")
+                                self.tier_ii_upgrade = bin.button.Button((300, 100), "assets/upgrade.png", "upgrade1", (125, 32))
                                 self.sale_items.add(self.tier_ii_upgrade)
                                 self.all_sprites.add(self.tier_ii_upgrade)
 
@@ -181,7 +181,7 @@ class Controller:
                             if self.sale_items:
                                 pass
                             elif self.character.health < 100:
-                                self.health_button = bin.button.Button((600, 100), "assets/heth_button.png", "health")
+                                self.health_button = bin.button.Button((575, 100), "assets/heth_button.png", "health", (125, 32))
                                 self.sale_items.add(self.health_button)
                                 self.all_sprites.add(self.health_button)
 
