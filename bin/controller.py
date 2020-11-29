@@ -134,6 +134,11 @@ class Controller:
                                     if self.character.health < 100 and self.character.total_money > 0:
                                         self.character.total_money -= 10
                                         self.character.health += 10
+                                    if self.character.health == 100:
+                                        e.kill()
+                                        self.health_button = bin.button.Button((565, 100), "assets/maxed_out.png", "null", (125, 32))
+                                        self.sale_items.add(self.health_button)
+                                        self.all_sprites.add(self.health_button)
                             else:
                                 pass
 
@@ -153,7 +158,7 @@ class Controller:
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
                     ## WAVE ENDING ##
-                    wave_complete_display = self.complete_font.render("Wave " + str(self.current_wave + 1) + " Complete!", False, (255, 255, 0))
+                    wave_complete_display = self.complete_font.render("Wave " + str(self.current_wave + 1) + "  Complete!", False, (255, 255, 0))
                     self.display.blit(wave_complete_display, (575, 200))
                     pygame.display.flip()
                     next_wave_sound = pygame.mixer.Sound("assets/sounds/endRoundSound.wav")
@@ -189,7 +194,7 @@ class Controller:
                             if self.sale_items:
                                 pass
                             elif self.character.upgrade_level == 1:
-                                self.tier_ii_upgrade = bin.button.Button((300, 100), "assets/upgrade.png", "upgrade1", (125, 32))
+                                self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_ii.png", "upgrade1", (125, 32))
                                 self.sale_items.add(self.tier_ii_upgrade)
                                 self.all_sprites.add(self.tier_ii_upgrade)
 
@@ -197,7 +202,11 @@ class Controller:
                             if self.sale_items:
                                 pass
                             elif self.character.health < 100:
-                                self.health_button = bin.button.Button((575, 100), "assets/heth_button.png", "health", (125, 32))
+                                self.health_button = bin.button.Button((565, 100), "assets/heth_button.png", "health", (125, 32))
+                                self.sale_items.add(self.health_button)
+                                self.all_sprites.add(self.health_button)
+                            elif self.character.health == 100:
+                                self.health_button = bin.button.Button((565, 100), "assets/maxed_out.png", "null", (125, 32))
                                 self.sale_items.add(self.health_button)
                                 self.all_sprites.add(self.health_button)
 
