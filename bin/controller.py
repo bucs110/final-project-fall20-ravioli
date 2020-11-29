@@ -22,22 +22,24 @@ class Controller:
         self.boundaries = (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry)
 
         self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
-        self.merchant_upgrade = bin.merchant.Merchant((200, 200), "assets/merchant.png", "upgrade")
+
 
         self.swing = 0
         self.STATE = "gameplay"
         self.current_wave = 0
         self.wave_list = os.listdir("etc")
         self.wave = "etc/" + str(self.wave_list[self.current_wave])
-        print(self.wave_list)
+        #print(self.wave_list)
         self.enemy_spawn_time = 100
         self.enemy_number = 0
 
         ##ESTABLISH SPRITE GROUPS##
-        self.all_sprites = pygame.sprite.Group( (self.character, self.merchant_upgrade) )
+        self.all_sprites = pygame.sprite.Group( (self.character) )
         self.all_enemies = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
         self.wave_reset = pygame.sprite.Group()
+        self.merchants = pygame.sprite.Group()
+        self.sale_items = pygame.sprite.Group()
 
         ##ESTALBISH IMPORTANT TEXT##
         self.health_font = pygame.font.SysFont('Times New Roman', 50)
@@ -119,6 +121,18 @@ class Controller:
                     if event.key == pygame.K_e:
                         reset_click = False
 
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.sale_items:
+                        for e in self.sale_items:
+                            if e.rect.collidepoint(event.pos):
+                                if e.use == "health":
+                                    if self.character.health < 100 and self.character.total_money > 0:
+                                        self.character.total_money -= 10
+                                        self.character.health += 10
+                            else:
+                                pass
+
+
             ## SPAWNING ENEMIES ##
             if self.enemy_spawn_time > 0:
                 self.enemy_spawn_time -= 1
@@ -133,9 +147,12 @@ class Controller:
             ## WAVE CHECKER ##
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
-                    self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png")
-                    self.all_sprites.add(self.wave_lever)
+                    self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null")
+                    self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
+                    self.health_merchant = bin.merchant.Merchant((600, 150), "assets/heth.png", "health")
+                    self.all_sprites.add(self.wave_lever, self.upgrade_merchant, self.health_merchant)
                     self.wave_reset.add(self.wave_lever)
+                    self.merchants.add(self.upgrade_merchant, self.health_merchant)
                 else:
                     if reset_click:
                         reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
@@ -144,6 +161,37 @@ class Controller:
                             self.wave_lever.toggle("assets/waveLeverFlipped.png")
                             self.enemy_number = 0
                             self.STATE = "nextWave"
+
+
+            ## MERCHANT INTERACTIONS ##
+            if self.merchants:
+                conversation = pygame.sprite.spritecollide(self.character, self.merchants, False, pygame.sprite.collide_circle_ratio(1.0))
+                #print(conversation)
+                if conversation:
+                    for merch in conversation:
+                        if merch.type == "upgrade":
+                            if self.sale_items:
+                                pass
+                            elif self.character.upgrade_level == 1:
+                                self.tier_ii_upgrade = bin.button.Button((300, 100), "assets/upgrade.png", "upgrade1")
+                                self.sale_items.add(self.tier_ii_upgrade)
+                                self.all_sprites.add(self.tier_ii_upgrade)
+
+                        elif merch.type == "health":
+                            if self.sale_items:
+                                pass
+                            elif self.character.health < 100:
+                                self.health_button = bin.button.Button((600, 100), "assets/heth_button.png", "health")
+                                self.sale_items.add(self.health_button)
+                                self.all_sprites.add(self.health_button)
+
+
+            ## CHECKS TO SEE IF THE CONVERSATIONS HAVE STOPPED ##
+            if self.merchants:
+                if conversation == []:
+                    #print("this is being read")
+                    for e in self.sale_items:
+                        e.kill()
 
 
             ## There are a bit of hardcoded values / magic numbers here but I just wanted to get it working ##
@@ -155,7 +203,7 @@ class Controller:
                         if e.gotHit() == "dead":
                             self.character.total_money += e.reward_money
                             e.kill()
-                        print(self.character.total_money)
+                        #print(self.character.total_money)
                 self.swing += 1
             if self.swing > 16:
                 self.swing = 0
@@ -216,6 +264,8 @@ class Controller:
         return: none
         """
         time.sleep(1)
+        for e in self.merchants:
+            e.kill()
         self.wave_lever.kill()
         if self.current_wave + 1 < len(self.wave_list):
             self.current_wave += 1

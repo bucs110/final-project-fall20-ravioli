@@ -1,7 +1,7 @@
 import pygame
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, position, filename):
+    def __init__(self, position, filename, use):
         """
         initialzes a button object
         args:
@@ -13,6 +13,7 @@ class Button(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
         self.rect.y = position[1]
+        self.use = use
 
     def toggle(self, filename):
         """

@@ -25,6 +25,7 @@ class Enemy(pygame.sprite.Sprite):
         self.reward_money = health
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
 
+        self.type = type
 
     def update(self):
         """
@@ -32,33 +33,37 @@ class Enemy(pygame.sprite.Sprite):
         Args: None
         Return:
         """
-        speed = 75
-        self.direction = bin.functions.randomDirection(self.count, self.direction)
-        self.direction = "none" ##make the enemy stationary for testing purposes##
-        if self.direction == "up" and self.rect.y > self.upper_boundry:
-            self.rect.y -= self.speed
-            self.count += 1
-            if self.count == speed:
-                self.count = 0
-        if self.direction == "down" and self.rect.y < self.lower_boundry:
-            self.rect.y += self.speed
-            self.count += 1
-            if self.count == speed:
-                self.count = 0
-        if self.direction == "right" and self.rect.x < self.right_boundry:
-            self.rect.x += self.speed
-            self.count += 1
-            if self.count == speed:
-                self.count = 0
-        if self.direction == "left" and self.rect.x > self.left_boundry:
-            self.rect.x -= self.speed
-            self.count += 1
-            if self.count == speed:
-                self.count = 0
-        if self.direction == "none":
-            self.count += self.speed
-            if self.count == speed:
-                self.count = 0
+        if self.type == "roamer":
+            speed = 75
+            self.direction = bin.functions.randomDirection(self.count, self.direction)
+            #self.direction = "none" ##make the enemy stationary for testing purposes##
+            if self.direction == "up" and self.rect.y > self.upper_boundry:
+                self.rect.y -= self.speed
+                self.count += 1
+                if self.count == speed:
+                    self.count = 0
+            if self.direction == "down" and self.rect.y < self.lower_boundry:
+                self.rect.y += self.speed
+                self.count += 1
+                if self.count == speed:
+                    self.count = 0
+            if self.direction == "right" and self.rect.x < self.right_boundry:
+                self.rect.x += self.speed
+                self.count += 1
+                if self.count == speed:
+                    self.count = 0
+            if self.direction == "left" and self.rect.x > self.left_boundry:
+                self.rect.x -= self.speed
+                self.count += 1
+                if self.count == speed:
+                    self.count = 0
+            if self.direction == "none":
+                self.count += self.speed
+                if self.count == speed:
+                    self.count = 0
+
+        if self.type == "still":
+            pass
 
     def switchDirection(self):
         """

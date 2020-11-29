@@ -1,4 +1,5 @@
 import pygame
+import bin.button
 
 
 class Merchant(pygame.sprite.Sprite):
@@ -11,22 +12,22 @@ class Merchant(pygame.sprite.Sprite):
         type --> (str) the type of merchant
         """
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (27,27))
+        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (48, 64))
         self.rect = self.image.get_rect()
         self.rect.x = position[0]
         self.rect.y = position[1]
         self.type = type
 
 
-    def exchange(self, type):
+    def exchange(self):
         """
         sets up the exchange between the merchant and the player
         Args: type --> (str) the type of merchant
         Return: (str) upgrade, health, or weapons
         """
-        if type == "upgrade":
+        if self.type == "upgrade":
             return "upgrade"
-        elif type == "health":
+        elif self.type == "health":
             return "health"
-        elif type == "banker":
+        elif self.type == "banker":
             return "banker"

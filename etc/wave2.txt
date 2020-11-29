@@ -11,20 +11,14 @@ Starting coordinate Y : 100
 Enemy Health : 30
 Enemy png : assets/ramsay.png
 ===============  Enemy 3  : ========================
-Enemy Type : roamer
+Enemy Type : still
 Starting coordinate X : 500
 Starting coordinate Y : 500
 Enemy Health : 40
 Enemy png : assets/ramsay.png
 ===============  Enemy 4  : ========================
-Enemy Type : roamer
+Enemy Type : still
 Starting coordinate X : 700
-Starting coordinate Y : 300
-Enemy Health : 20
-Enemy png : assets/ramsay.png
-===============  Enemy 5  : ========================
-Enemy Type : roamer
-Starting coordinate X : 1000
 Starting coordinate Y : 300
 Enemy Health : 20
 Enemy png : assets/ramsay.png
