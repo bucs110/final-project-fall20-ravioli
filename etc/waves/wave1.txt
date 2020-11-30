@@ -1,6 +1,12 @@
 ===============  Enemy 1  : ========================
-Enemy Type : still
+Enemy Type : roamer
 Starting coordinate X : 400
 Starting coordinate Y : 100
 Enemy Health : 10
-Enemy png : assets/ramsay.png
+Enemy png : assets/enemyAnimations/walkL/enemyWalkL1.png
+===============  Enemy 2  : ========================
+Enemy Type : still
+Starting coordinate X : 400
+Starting coordinate Y : 400
+Enemy Health : 10
+Enemy png : assets/enemyAnimations/walkL/enemyWalkL1.png

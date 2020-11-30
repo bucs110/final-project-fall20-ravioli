@@ -14,7 +14,7 @@ class Enemy(pygame.sprite.Sprite):
         boundaries --> (touple) the world boundaries for the screen
         """
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(filename)
+        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (75,75))
         self.rect = self.image.get_rect()
         self.rect.x = positionX
         self.rect.y = positionY
@@ -28,6 +28,14 @@ class Enemy(pygame.sprite.Sprite):
 
         self.type = type
 
+        ## animation variables ##
+        self.animation_frame = "enemyWalkL1.png"
+        self.current_iteration = 0
+        self.frame = 0
+        self.animation_folder = "assets/enemyAnimations/walkL"
+        self.animation_rate = 2
+        self.animation_state = "ACTIVE"
+
     def update(self):
         """
         Updates the model for a single frame
@@ -39,29 +47,45 @@ class Enemy(pygame.sprite.Sprite):
             self.direction = bin.functions.randomDirection(self.count, self.direction)
             #self.direction = "none" ##make the enemy stationary for testing purposes##
             if self.direction == "up" and self.rect.y > self.upper_boundry:
+                self.animation_state = "ACTIVE"
                 self.rect.y -= self.speed
                 self.count += 1
                 if self.count == speed:
                     self.count = 0
             if self.direction == "down" and self.rect.y < self.lower_boundry:
+                self.animation_state = "ACTIVE"
                 self.rect.y += self.speed
                 self.count += 1
                 if self.count == speed:
                     self.count = 0
             if self.direction == "right" and self.rect.x < self.right_boundry:
+                self.animation_state = "ACTIVE"
+                self.animation_folder = "assets/enemyAnimations/walkR"
                 self.rect.x += self.speed
                 self.count += 1
                 if self.count == speed:
                     self.count = 0
             if self.direction == "left" and self.rect.x > self.left_boundry:
+                self.animation_state = "ACTIVE"
+                self.animation_folder = "assets/enemyAnimations/walkL"
                 self.rect.x -= self.speed
                 self.count += 1
                 if self.count == speed:
                     self.count = 0
             if self.direction == "none":
+                self.animation_state == "INACTIVE"
                 self.count += self.speed
                 if self.count == speed:
                     self.count = 0
+
+            if self.animation_state == "ACTIVE":
+                self.current_iteration = bin.functions.currentIterationChecker(self.current_iteration, self.animation_folder)
+                (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, self.animation_rate, self.current_iteration, self.frame, self.animation_frame)
+                self.image = pygame.transform.smoothscale(pygame.image.load(self.animation_folder + "/" + self.animation_frame).convert_alpha(), (75,75))
+                temporary = self.image.get_rect()
+                temporary.x = self.rect.x
+                temporary.y = self.rect.y
+                self.rect = temporary
 
         if self.type == "still":
             pass
