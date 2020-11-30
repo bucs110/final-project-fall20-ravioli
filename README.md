@@ -80,6 +80,23 @@ This the the screen the player sees while playing the game.
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Run Counter Program  | GUI window appears with count = 0  |          |
-|  2  | click count button  | display changes to count = 1 |                 |
-etc...
+|  1  | Press "W" key  | Knight moves up and stays within the screen  |          |
+|  2  | Press "A" key  | Knight moves left and stays within screen |                 |
+|  3  | Press "S" key  | Knight moves down and stays within the screen  |          |
+|  4  | Press "D" key  | Knight moves right and stays within screen |                 |
+|  5  | Press spacebar  | Knight swings sword and slashing sound is made  |          |
+|  6  | Press "W" and "A" keys  | Knight moves to the upper left diagonal and stays within screen |                 |
+|  7  | Press "W" and "D" keys  | Knight moves to the upper right diagonal and stays within the screen  |          |
+|  8  | Press "S" and "A" keys  | Knight moves to the lower left diagonal and stays within screen |                 |
+|  9  | Press "S" and "D" keys  | Knight moves to the lower right diagonal and stays within the screen  |          |
+|  10  | Move to within BLANK pixels of enemy and press spacebar  | The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back, and the enemy loses health. |                 |
+|  11  | Enemy comes within BLANK pixels of the knight and spacebar is not pressed  | Knight bounces back, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.  |          |
+|  12  | Overlap knight with lever on screen with merchants and press "E" key  | The lever handle flips, makes a BLANK NOISE, and another round of gameplay with a new wave begins.  |                 |
+|  13  | Move knight to within BLANK pixels of yellow wizard on merchant screen  | Button for exchange of money for BLANK power up appears  |          |
+|  14  | Move knight to within BLANK pixels of Red wizard on merchant screen  | Button for exchange of money for an increase in health appears |                 |
+|  15  | Move knight to within BLANK pixels of blue wizard on merchant screen  | Button for exchange of money for speed appears  |          |
+|  16  | Click on button from yellow knight  | Money count decreases by 250 EXPAND |                 |
+|  17  | Click on button from red knight  | Money count decreases by 10 and health count increases by 10.  |          |
+|  18  | Click on button from red knight  | Money count decreases by 50 and knight is BLANK times faster in the next round of gameplay. EXPAND BC CHANGING AMOUNTS OF MONEY |                 |
+|  3  | Press "S" key  | Knight moves down and stays within the screen  |          |
+|  2  | Press "D" key  | Knight moves right and stays within screen |                 |
