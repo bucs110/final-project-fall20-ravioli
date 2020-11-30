@@ -7,7 +7,7 @@
 
 https://github.com/bucs110/final-project-fall20-ravioli.git
 
-<< [link to demo presentation slides](#) >>
+https://docs.google.com/presentation/d/1GAui5JCBEnaJ_AB3h4D5tnfH_YqFALjKpIkGhKZkrio/edit#slide=id.g33aee8826e_9_16
 
 ### Team: Ravioli
 #### Emily Greene, Roman Raguso, Josef Schindler
@@ -40,6 +40,11 @@ This the the screen the player sees while playing the game.
 	* Pygame
 		* https://www.pygame.org/docs/
 		* Pygame is a framework library that handles the view of a program and is designed for writing video games.
+	* os
+		* https://docs.python.org/3/library/os.html
+		* os allows the usage of operating system dependent functionality.
+
+		
 
 * Class Interface Design
         * ![class diagram](assets/class_diagram.jpg) 
@@ -69,8 +74,7 @@ This the the screen the player sees while playing the game.
 << The back end specialist... >>
 
 ## Testing
-* << Describe your testing strategy for your project. >>
-    * << Example >>
+* ****I tested the code at least once a week; however, whenever I saw that new code had been pushed, I pulled it and ran it to ensure it was working properly. I regularly went through the code to make sure I understood it all, that it was all dry, and that it made sense and worked together. As a team, we went through the code twice. I used an exploratory testing method to ensure optimization because it was the most time efficient and, in my opinion, the most true to life way of testing out our game. I mostly played the game to the extent that it was made at the moment and went through each action that was made then. I knew how the game was supposed to be played and the objective of it, so I would go through every action that the character could do, such as moving up/down/left/right, swinging its sword in thin air, swinging its sword to hit an enemy, killing enemies, and dying. I also went through every sound that could be made in the game while it was running to ensure that the sounds came across correctly.****
 
 * Your ATP
 
