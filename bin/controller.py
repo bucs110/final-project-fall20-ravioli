@@ -27,8 +27,8 @@ class Controller:
         self.swing = 0
         self.STATE = "gameplay"
         self.current_wave = 0
-        self.wave_list = os.listdir("etc")
-        self.wave = "etc/" + str(self.wave_list[self.current_wave])
+        self.wave_list = os.listdir("etc/waves")
+        self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
         #print(self.wave_list)
         self.enemy_spawn_time = 100
         self.enemy_number = 0
@@ -357,7 +357,7 @@ class Controller:
         self.wave_lever.kill()
         if self.current_wave + 1 < len(self.wave_list):
             self.current_wave += 1
-            self.wave = "etc/" + str(self.wave_list[self.current_wave])
+            self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
             self.STATE = "gameplay"
         elif self.current_wave == len(self.wave_list):
             self.STATE == "winScreen"
