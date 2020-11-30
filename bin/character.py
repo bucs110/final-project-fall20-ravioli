@@ -27,6 +27,7 @@ class Character(pygame.sprite.Sprite):
         self.got_hit_cooldown = 0
         self.total_money = 0
         self.upgrade_level = 1
+        self.damage_output = 5
 
         ## animation variables ##
         self.animation_frame = "idleR1.png"

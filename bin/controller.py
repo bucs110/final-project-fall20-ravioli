@@ -80,7 +80,6 @@ class Controller:
             self.total_wave_enemies = len(information) // 6
 
         if len(self.merchants) == 0:
-            print("got here")
             wave_complete_display = self.complete_font.render("", False, (255, 255, 0))
 
         ## EVENT LOOP ##
@@ -139,6 +138,25 @@ class Controller:
                                         self.health_button = bin.button.Button((565, 100), "assets/maxed_out.png", "null", (125, 32))
                                         self.sale_items.add(self.health_button)
                                         self.all_sprites.add(self.health_button)
+                                if e.use == "upgrade_ii":
+                                    if self.character.upgrade_level == 1:
+                                        self.character.upgrade_level += 1
+                                        self.character.hit_ratio = 1.5
+                                        self.character.damage_output = 10
+                                        e.kill()
+                                        self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
+                                        self.sale_items.add(self.tier_ii_upgrade)
+                                        self.all_sprites.add(self.tier_ii_upgrade)
+                                if e.use == "upgrade_iii":
+                                    if self.character.upgrade_level == 2:
+                                        self.character.upgrade_level += 1
+                                        self.character.hit_ratio = 2.0
+                                        self.character.damage_output = 20
+                                        e.kill()
+                                        self.health_button = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
+                                        self.sale_items.add(self.health_button)
+                                        self.all_sprites.add(self.health_button)
+
                             else:
                                 pass
 
@@ -194,9 +212,17 @@ class Controller:
                             if self.sale_items:
                                 pass
                             elif self.character.upgrade_level == 1:
-                                self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_ii.png", "upgrade1", (125, 32))
+                                self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_ii.png", "upgrade_ii", (125, 32))
                                 self.sale_items.add(self.tier_ii_upgrade)
                                 self.all_sprites.add(self.tier_ii_upgrade)
+                            elif self.character.upgrade_level == 2:
+                                self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
+                                self.sale_items.add(self.tier_ii_upgrade)
+                                self.all_sprites.add(self.tier_ii_upgrade)
+                            elif self.character.upgrade_level == 3:
+                                self.health_button = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
+                                self.sale_items.add(self.health_button)
+                                self.all_sprites.add(self.health_button)
 
                         elif merch.type == "health":
                             if self.sale_items:
@@ -225,7 +251,7 @@ class Controller:
                     sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                     for e in sword_swing:
                         e.knockBack(self.character.direction)
-                        if e.gotHit() == "dead":
+                        if e.gotHit(self.character.damage_output) == "dead":
                             self.character.total_money += e.reward_money
                             e.kill()
                         #print(self.character.total_money)

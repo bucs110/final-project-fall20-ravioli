@@ -74,13 +74,14 @@ class Enemy(pygame.sprite.Sprite):
         """
         self.direction = bin.functions.makeOppositeDirections(self.direction)
 
-    def gotHit(self):
+    def gotHit(self, damage):
         """
         used to reduce the health of the enemy's health when it gets hit
         Args: None
         Return: (str) alive or dead
         """
         ## add knockback ##
+        self.damage = damage
         self.health -= self.damage
         chosen_sound = random.choice(["assets/sounds/enemyHitSound1.wav", "assets/sounds/enemyHitSound2.wav"])
         enemy_hit_sound = pygame.mixer.Sound(chosen_sound)
