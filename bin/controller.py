@@ -144,18 +144,32 @@ class Controller:
                                         self.character.hit_ratio = 1.5
                                         self.character.damage_output = 10
                                         e.kill()
-                                        self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
-                                        self.sale_items.add(self.tier_ii_upgrade)
-                                        self.all_sprites.add(self.tier_ii_upgrade)
+                                        self.tier_iii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
+                                        self.sale_items.add(self.tier_iii_upgrade)
+                                        self.all_sprites.add(self.tier_iii_upgrade)
                                 if e.use == "upgrade_iii":
                                     if self.character.upgrade_level == 2:
                                         self.character.upgrade_level += 1
                                         self.character.hit_ratio = 2.0
                                         self.character.damage_output = 20
                                         e.kill()
-                                        self.health_button = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
-                                        self.sale_items.add(self.health_button)
-                                        self.all_sprites.add(self.health_button)
+                                        self.maxed_out = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
+                                        self.sale_items.add(self.maxed_out)
+                                        self.all_sprites.add(self.maxed_out)
+                                if e.use == "speed_1":
+                                    if self.character.speed == 3:
+                                        self.character.speed += 2
+                                        e.kill()
+                                        self.speed_button = bin.button.Button((865, 100), "assets/speed_2.png", "speed_2", (125, 32))
+                                        self.sale_items.add(self.speed_button)
+                                        self.all_sprites.add(self.speed_button)
+                                if e.use == "speed_2":
+                                    if self.character.speed == 5:
+                                        self.character.speed += 2
+                                        e.kill()
+                                        self.maxed_out = bin.button.Button((865, 100), "assets/maxed_out.png", "null", (125, 32))
+                                        self.sale_items.add(self.maxed_out)
+                                        self.all_sprites.add(self.maxed_out)
 
                             else:
                                 pass
@@ -175,6 +189,7 @@ class Controller:
             ## WAVE CHECKER ##
             if self.enemy_spawn_time == 0 and len(self.all_enemies) == 0 and self.enemy_number == self.total_wave_enemies:
                 if len(self.wave_reset) == 0:
+
                     ## WAVE ENDING ##
                     wave_complete_display = self.complete_font.render("Wave " + str(self.current_wave + 1) + "  Complete!", False, (255, 255, 0))
                     self.display.blit(wave_complete_display, (575, 200))
@@ -183,14 +198,15 @@ class Controller:
                     next_wave_sound.play()
                     time.sleep(5)
 
+                    ## CREATE MERCHANTS AND LEVERS ##
                     wave_complete_display = self.complete_font.render("Walk up to merchants and click the buttons to upgrade.", False, (255, 255, 0))
-
                     self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
                     self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
                     self.health_merchant = bin.merchant.Merchant((600, 150), "assets/heth.png", "health")
-                    self.all_sprites.add(self.wave_lever, self.upgrade_merchant, self.health_merchant)
+                    self.speed_merchant = bin.merchant.Merchant((900, 150), "assets/wizard.png", "speed")
+                    self.all_sprites.add(self.wave_lever, self.upgrade_merchant, self.health_merchant, self.speed_merchant)
                     self.wave_reset.add(self.wave_lever)
-                    self.merchants.add(self.upgrade_merchant, self.health_merchant)
+                    self.merchants.add(self.upgrade_merchant, self.health_merchant, self.speed_merchant)
                 else:
                     if reset_click:
                         reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
@@ -216,13 +232,13 @@ class Controller:
                                 self.sale_items.add(self.tier_ii_upgrade)
                                 self.all_sprites.add(self.tier_ii_upgrade)
                             elif self.character.upgrade_level == 2:
-                                self.tier_ii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
-                                self.sale_items.add(self.tier_ii_upgrade)
-                                self.all_sprites.add(self.tier_ii_upgrade)
+                                self.tier_iii_upgrade = bin.button.Button((265, 100), "assets/upgrade_iii.png", "upgrade_iii", (125, 32))
+                                self.sale_items.add(self.tier_iii_upgrade)
+                                self.all_sprites.add(self.tier_iii_upgrade)
                             elif self.character.upgrade_level == 3:
-                                self.health_button = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
-                                self.sale_items.add(self.health_button)
-                                self.all_sprites.add(self.health_button)
+                                self.maxed_out = bin.button.Button((265, 100), "assets/maxed_out.png", "null", (125, 32))
+                                self.sale_items.add(self.maxed_out)
+                                self.all_sprites.add(self.maxed_out)
 
                         elif merch.type == "health":
                             if self.sale_items:
@@ -235,7 +251,21 @@ class Controller:
                                 self.health_button = bin.button.Button((565, 100), "assets/maxed_out.png", "null", (125, 32))
                                 self.sale_items.add(self.health_button)
                                 self.all_sprites.add(self.health_button)
-
+                        elif merch.type == "speed":
+                            if self.sale_items:
+                                pass
+                            elif self.character.speed == 3:
+                                self.speed_button = bin.button.Button((865, 100), "assets/speed_1.png", "speed_1", (125, 32))
+                                self.sale_items.add(self.speed_button)
+                                self.all_sprites.add(self.speed_button)
+                            elif self.character.speed == 5:
+                                self.speed_button = bin.button.Button((865, 100), "assets/speed_2.png", "speed_2", (125, 32))
+                                self.sale_items.add(self.speed_button)
+                                self.all_sprites.add(self.speed_button)
+                            elif self.character.speed == 7:
+                                self.maxed_out = bin.button.Button((865, 100), "assets/maxed_out.png", "null", (125, 32))
+                                self.sale_items.add(self.maxed_out)
+                                self.all_sprites.add(self.maxed_out)
 
             ## CHECKS TO SEE IF THE CONVERSATIONS HAVE STOPPED ##
             if self.merchants:

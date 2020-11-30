@@ -88,7 +88,7 @@ def spawnEnemy(filename, boundaries, enemy_number):
     filename --> (str) the name of the text file with the wave information
     boundaries --> (touple) pixel limitations for the enemy movement
     enemy_number --> (int) the enemy's place in the wave lineup
-    Return: (touple) --> information about the wave enemies
+    Return: (obj) --> the enemy object
     """
     with open(filename, 'r') as file:
         wave_information = file.readlines()
