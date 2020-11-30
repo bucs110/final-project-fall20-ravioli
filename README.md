@@ -43,18 +43,21 @@ This the the screen the player sees while playing the game.
 	* os
 		* https://docs.python.org/3/library/os.html
 		* os allows the usage of operating system dependent functionality.
+	* time
+		* https://docs.python.org/3/library/time.html
+		* The time module allows the user to use time-related functions.
 
 		
 
 * Class Interface Design
         * ![class diagram](assets/class_diagram.jpg) 
 * Classes
-    * Character- This is the player that the user controls. It can move around, get hit by an enemy and lose health, and get knocked back after being hit.
-    * Enemy- This creates the enemies that the character fights. It can move within the boundaries, change direction, get hit and lose health, and get knocked back after being hit.
-    * Melee- This creates the sword weapon which deals melee damage to the enemies. (not currently in use- left in for future repurpose)
-    * Button- This creates a button that can be clicked to lead to other information to the player.
-    * Merchant- This is a seller that the character can buy goods from.
-    * Controller- This initializes the screen and creates sprite groups for all of the sprites and just the enemies. It establishes the key movements of "w," "a," "s," "d," and the spacebar, which signals for the sword to strike. This allows the enemies to get hit if the rectangles of the sword and the enemy overlap, and it allows the enemies to die. Also, it allows for the detection of the player being hit by the enemies.  If the player is hit, it loses health, and either stays alive and is knocked back or dies.
+    * Character- This is the knight player that the user controls. It can move around, get hit by an enemy and lose health, get knocked back after being hit, and attack an enemy.
+    * Enemy- This creates the different kinds of enemies that the character fights. There are roamer enemies, enemies that move horizontally, and enemies that follow the knight. The enemies can change direction, lose health after being hit, knock back the knight after hitting the knight
+    * Melee- This creates the sword weapon which deals melee damage to the enemies (not currently in use- left in for potential future repurpose).
+    * Button- This creates a button that can be clicked and toggled after being clicked.
+    * Merchant- This is a seller that the knight can buy upgrades from.
+    * Controller- This initializes the screen, creates the different game states (start, gameplay, exit, next wave, victory, lose), and creates sprite groups for all of the sprites and just the enemies. It establishes the key movements of "w," "a," "s," "d," "LCTRL" (exits game) and the spacebar (signals for the sword to strike). This allows the enemies to get hit if the rectangles of the sword and the enemy overlap, and it allows the enemies to lose health and die. Also, it allows for the detection of the knight being hit by the enemies.  If the knight is hit, it loses health, and either stays alive and is knocked back or dies. The controller also establishes the wave system of the game; after each round of gameplay, there is another and a more difficult wave of enemies. This class calls for the spawning of the different kinds of enemies dependent on which wave is currently in play. It also spawns merchants and establishes the ability for the knight to buy items, such as speed upgrades, increased damage output and an increase in health, from the merchants after each round of gameplay. This class allows the player to maneuver the knight over the lever on the merchant screen and press "e" to begin the next wave. 
 
 ***
 
