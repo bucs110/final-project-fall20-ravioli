@@ -3,29 +3,31 @@ import random
 import bin.functions
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, type, positionX, positionY, health, filename, boundaries):
+    def __init__(self, type, positionX, positionY, health, speed, boundaries):
         """
         Initializes the enemies for the user
         Args:
         type --> (str) the given type for an enemy ## NOT FULLY IMPLEMENTED YET ##
         positionX --> (int) the enemy's inital X coordinate
         positionY --> (int) the enemy's inital Y coordinate
-        filename --> (str) the name of the file for the enemy image
+        speed --> (str) how many pixels the enemy moves with each step
         boundaries --> (touple) the world boundaries for the screen
         """
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.smoothscale(pygame.image.load(filename).convert_alpha(), (75,75))
+        self.image = pygame.transform.smoothscale(pygame.image.load("assets/enemyAnimations/walkR/enemyWalkR1.png").convert_alpha(), (75,75))
         self.rect = self.image.get_rect()
         self.rect.x = positionX
         self.rect.y = positionY
         self.count = 0
         self.direction = "up"
-        self.speed = 3
+        self.speed = int(speed)
         self.health = health
         self.reward_money = health
         self.damage = 5
         (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = boundaries
 
+        self.characterX = 400
+        self.characterY = 400
         self.type = type
 
         ## animation variables ##
@@ -50,12 +52,16 @@ class Enemy(pygame.sprite.Sprite):
                 self.animation_state = "ACTIVE"
                 self.rect.y -= self.speed
                 self.count += 1
+                if self.rect.y == self.upper_boundry:
+                    self.direction = "down"
                 if self.count == speed:
                     self.count = 0
             if self.direction == "down" and self.rect.y < self.lower_boundry:
                 self.animation_state = "ACTIVE"
                 self.rect.y += self.speed
                 self.count += 1
+                if self.rect.y == self.lower_boundry:
+                    self.direction = "up"
                 if self.count == speed:
                     self.count = 0
             if self.direction == "right" and self.rect.x < self.right_boundry:
@@ -63,6 +69,8 @@ class Enemy(pygame.sprite.Sprite):
                 self.animation_folder = "assets/enemyAnimations/walkR"
                 self.rect.x += self.speed
                 self.count += 1
+                if self.rect.x == self.right_boundry:
+                    self.direction = "left"
                 if self.count == speed:
                     self.count = 0
             if self.direction == "left" and self.rect.x > self.left_boundry:
@@ -70,6 +78,8 @@ class Enemy(pygame.sprite.Sprite):
                 self.animation_folder = "assets/enemyAnimations/walkL"
                 self.rect.x -= self.speed
                 self.count += 1
+                if self.rect.x == self.left_boundry:
+                    self.direction = "right"
                 if self.count == speed:
                     self.count = 0
             if self.direction == "none":
@@ -89,6 +99,9 @@ class Enemy(pygame.sprite.Sprite):
 
         if self.type == "still":
             pass
+
+        if self.type == "tracker":
+            self.follow(self.characterX, self.characterY)
 
     def switchDirection(self):
         """
@@ -143,3 +156,29 @@ class Enemy(pygame.sprite.Sprite):
             if self.rect.x < self.left_boundry:
                 self.rect.x = self.left_boundry
         #self.direction = "none"
+
+    def getCharacterCoords(self, coordinates):
+        """
+        Gets the character's coordinates
+        args: coordinates (touple) --> touple containing the character coordinates
+        return: none
+        """
+        self.characterX = coordinates[0]
+        self.characterY = coordinates[1]
+
+    def follow(self, characterX, characterY):
+        """
+        Moves the enemy to follow the character
+        args:
+        characterX --> (int) the character's x coordinate
+        characterY --> (int) the character's y coordinate
+        return: none
+        """
+        if self.rect.x < characterX:
+            self.rect.x += self.speed
+        elif self.rect.x > characterX:
+            self.rect.x -= self.speed
+        if self.rect.y < characterY:
+            self.rect.y += self.speed
+        elif self.rect.y > characterY:
+            self.rect.y -= self.speed

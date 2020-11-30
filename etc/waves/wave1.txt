@@ -1,6 +1,6 @@
 ===============  Enemy 1  : ========================
-Enemy Type : still
+Enemy Type : tracker
 Starting coordinate X : 400
 Starting coordinate Y : 400
 Enemy Health : 10
-Enemy png : assets/enemyAnimations/walkL/enemyWalkL1.png
+Enemy speed : 1

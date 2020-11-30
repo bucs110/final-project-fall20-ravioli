@@ -25,19 +25,6 @@ class Merchant(pygame.sprite.Sprite):
         self.animation_folder = filename
         self.animation_rate = 2
 
-    def exchange(self):
-        """
-        sets up the exchange between the merchant and the player
-        Args: type --> (str) the type of merchant
-        Return: (str) upgrade, health, or weapons
-        """
-        if self.type == "upgrade":
-            return "upgrade"
-        elif self.type == "health":
-            return "health"
-        elif self.type == "banker":
-            return "banker"
-
     def update(self):
         """
         Used for updating the animation frame for the merchant

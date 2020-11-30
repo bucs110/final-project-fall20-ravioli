@@ -1,12 +1,12 @@
 ===============  Enemy 1  : ========================
 Enemy Type : roamer
 Starting coordinate X : 400
-Starting coordinate Y : 100
-Enemy Health : 20
-Enemy png : assets/enemyAnimations/walkL/enemyWalkL1.png
+Starting coordinate Y : 400
+Enemy Health : 10
+Enemy speed : 3
 ===============  Enemy 2  : ========================
 Enemy Type : roamer
-Starting coordinate X : 500
-Starting coordinate Y : 100
-Enemy Health : 60
-Enemy png : assets/enemyAnimations/walkL/enemyWalkL1.png
+Starting coordinate X : 400
+Starting coordinate Y : 400
+Enemy Health : 10
+Enemy speed : 5
