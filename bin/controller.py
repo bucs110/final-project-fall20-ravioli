@@ -82,6 +82,9 @@ class Controller:
         if len(self.merchants) == 0:
             wave_complete_display = self.complete_font.render("", False, (255, 255, 0))
 
+        pygame.mixer.music.load('assets/music/waveMusic.wav')
+        pygame.mixer.music.play(-1)
+
         ## EVENT LOOP ##
         while self.STATE == "gameplay":
             for event in pygame.event.get():
@@ -191,6 +194,7 @@ class Controller:
                 if len(self.wave_reset) == 0:
 
                     ## WAVE ENDING ##
+                    pygame.mixer.music.stop()
                     wave_complete_display = self.complete_font.render("Wave " + str(self.current_wave + 1) + "  Complete!", False, (255, 255, 0))
                     self.display.blit(wave_complete_display, (575, 200))
                     pygame.display.flip()
@@ -199,6 +203,8 @@ class Controller:
                     time.sleep(5)
 
                     ## CREATE MERCHANTS AND LEVERS ##
+                    pygame.mixer.music.load('assets/music/upgradeMusic.wav')
+                    pygame.mixer.music.play(-1)
                     wave_complete_display = self.complete_font.render("Walk up to merchants and click the buttons to upgrade.", False, (255, 255, 0))
                     self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
                     self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/wizard.png", "upgrade")
@@ -212,7 +218,7 @@ class Controller:
                         reset_contact = pygame.sprite.spritecollide(self.character, self.wave_reset, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
                         if reset_contact:
                             ##ADVANCE TO NEXT WAVE##
-
+                            pygame.mixer.music.stop()
                             self.wave_lever.toggle("assets/waveLeverFlipped.png")
                             self.enemy_number = 0
                             self.STATE = "nextWave"
