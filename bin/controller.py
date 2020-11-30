@@ -133,7 +133,7 @@ class Controller:
                         for e in self.sale_items:
                             if e.rect.collidepoint(event.pos):
                                 if e.use == "health":
-                                    if self.character.health < 100 and self.character.total_money > 0:
+                                    if self.character.health < 100 and self.character.total_money >= 10:
                                         self.character.total_money -= 10
                                         self.character.health += 10
                                     if self.character.health == 100:
@@ -142,7 +142,7 @@ class Controller:
                                         self.sale_items.add(self.health_button)
                                         self.all_sprites.add(self.health_button)
                                 if e.use == "upgrade_ii":
-                                    if self.character.upgrade_level == 1 and self.character.total_money > 0:
+                                    if self.character.upgrade_level == 1 and self.character.total_money >= 250:
                                         self.character.total_money -= 250
                                         self.character.upgrade_level += 1
                                         self.character.hit_ratio = 1.5
@@ -152,7 +152,7 @@ class Controller:
                                         self.sale_items.add(self.tier_iii_upgrade)
                                         self.all_sprites.add(self.tier_iii_upgrade)
                                 if e.use == "upgrade_iii":
-                                    if self.character.upgrade_level == 2 and self.character.total_money > 0:
+                                    if self.character.upgrade_level == 2 and self.character.total_money >= 500:
                                         self.character.total_money -= 500
                                         self.character.upgrade_level += 1
                                         self.character.hit_ratio = 2.0
@@ -162,7 +162,7 @@ class Controller:
                                         self.sale_items.add(self.maxed_out)
                                         self.all_sprites.add(self.maxed_out)
                                 if e.use == "speed_1":
-                                    if self.character.speed == 3 and self.character.total_money > 0:
+                                    if self.character.speed == 3 and self.character.total_money >= 50:
                                         self.character.total_money -= 50
                                         self.character.speed += 2
                                         e.kill()
@@ -170,7 +170,7 @@ class Controller:
                                         self.sale_items.add(self.speed_button)
                                         self.all_sprites.add(self.speed_button)
                                 if e.use == "speed_2":
-                                    if self.character.speed == 5 and self.character.total_money > 0:
+                                    if self.character.speed == 5 and self.character.total_money >= 100:
                                         self.character.total_money -= 100
                                         self.character.speed += 2
                                         e.kill()
