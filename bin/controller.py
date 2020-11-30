@@ -25,7 +25,7 @@ class Controller:
 
 
         self.swing = 0
-        self.STATE = "gameplay"
+        self.STATE = "start"
         self.current_wave = 0
         self.wave_list = os.listdir("etc/waves")
         self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
@@ -53,6 +53,7 @@ class Controller:
         self.health_button_location = (530, 80)
         self.upgrade_button_location = (230, 80)
         self.speed_button_location = (830, 80)
+
     def mainloop(self):
         """
         Determines which loops of the game should run
@@ -60,18 +61,39 @@ class Controller:
         return: none
         """
         while True:
-            if self.STATE == "menu":
-                pass
+            if self.STATE == "start":
+                self.startloop()
             elif self.STATE == "gameplay":
                 self.gameloop()
             elif self.STATE == "exit":
                 self.exitloop()
             elif self.STATE == "nextWave":
                 self.nextWave()
-            elif self.STATE == "winScreen":
-                pass
+            elif self.STATE == "victory":
+                self.victory()
             elif self.STATE == "loseScreen":
-                pass
+                self.loseScreen()
+
+    def startloop(self):
+        """
+        displays the starting screen
+        args: none
+        return: none
+        """
+        self.background = bin.button.Button((0, 0), "assets/gui_design_screen.jpg", "null", (1500, 800))
+
+        while self.STATE == "start":
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.STATE = "exit"
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_e:
+                        self.STATE = "gameplay"
+
+            self.display.fill((255, 255, 255))
+            self.display.blit(self.background.image, self.background.rect)
+            pygame.display.flip()
 
     def gameloop(self):
         """
@@ -327,7 +349,7 @@ class Controller:
                 player_life = self.character.gotHit()
                 if player_life == "dead":
                     self.character.kill()
-                    self.STATE = "exit"
+                    self.STATE = "loseScreen"
                 elif player_life == "alive":
                     self.character.knockBack() ##maybe do some editing to make smoother##
                     character_hit_sound = pygame.mixer.Sound("assets/sounds/playerHitSound.wav")
@@ -351,7 +373,7 @@ class Controller:
             self.display.blit(lever_display, (625, 450))
 
             for e in self.all_enemies:
-                e.getCharacterCoords(self.character.givePosition())    
+                e.getCharacterCoords(self.character.givePosition())
             self.all_sprites.draw(self.display)
             pygame.display.flip()
 
@@ -370,13 +392,48 @@ class Controller:
         for e in self.merchants:
             e.kill()
         self.wave_lever.kill()
-        if self.current_wave + 1 < len(self.wave_list):
+        if self.current_wave + 1 <= len(self.wave_list):
             self.current_wave += 1
-            self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
-            self.STATE = "gameplay"
-        elif self.current_wave == len(self.wave_list):
-            self.STATE == "winScreen"
+            if (self.current_wave) == len(self.wave_list):
+                self.STATE = "victory"
 
+            else:
+                self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
+                self.STATE = "gameplay"
+
+
+    def victory(self):
+        """
+        displays the winning screen
+        args: none
+        return: none
+        """
+        self.background = bin.button.Button((0, 0), "assets/gui_design_victory.jpg", "null", (1500, 800))
+        while self.STATE == "victory":
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.STATE = "exit"
+
+            self.display.fill((255, 255, 255))
+            self.display.blit(self.background.image, self.background.rect)
+            pygame.display.flip()
+
+    def loseScreen(self):
+        """
+        displays the winning screen
+        args: none
+        return: none
+        """
+        self.background = bin.button.Button((0, 0), "assets/gui_design_lose.jpg", "null", (1500, 800))
+
+        while self.STATE == "loseScreen":
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.STATE = "exit"
+
+            self.display.fill((255, 255, 255))
+            self.display.blit(self.background.image, self.background.rect)
+            pygame.display.flip()
 
     def exitloop(self):
         """

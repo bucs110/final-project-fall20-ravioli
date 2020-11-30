@@ -1,12 +1,12 @@
 ===============  Enemy 1  : ========================
-Enemy Type : roamer
+Enemy Type : still
 Starting coordinate X : 400
 Starting coordinate Y : 400
-Enemy Health : 10
-Enemy speed : 3
+Enemy Health : 15
+Enemy speed : 0
 ===============  Enemy 2  : ========================
 Enemy Type : roamer
 Starting coordinate X : 400
 Starting coordinate Y : 400
 Enemy Health : 10
-Enemy speed : 5
+Enemy speed : 1

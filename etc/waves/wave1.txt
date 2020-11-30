@@ -1,6 +1,6 @@
 ===============  Enemy 1  : ========================
-Enemy Type : horizontal
+Enemy Type : still
 Starting coordinate X : 400
 Starting coordinate Y : 400
-Enemy Health : 10
-Enemy speed : 5
+Enemy Health : 5
+Enemy speed : 1
