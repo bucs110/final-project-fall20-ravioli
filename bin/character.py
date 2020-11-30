@@ -25,7 +25,7 @@ class Character(pygame.sprite.Sprite):
         self.health = 100
         self.attack_cooldown = 0
         self.got_hit_cooldown = 0
-        self.total_money = 1000
+        self.total_money = 200
         self.upgrade_level = 1
         self.damage_output = 5
 
