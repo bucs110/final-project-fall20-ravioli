@@ -19,7 +19,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = positionX
         self.rect.y = positionY
         self.count = 0
-        self.direction = "up"
+
         self.speed = int(speed)
         self.health = health
         self.reward_money = health
@@ -29,6 +29,8 @@ class Enemy(pygame.sprite.Sprite):
         self.characterX = 400
         self.characterY = 400
         self.type = type
+        self.direction = "right"
+
 
         ## animation variables ##
         self.animation_frame = "enemyWalkL1.png"
@@ -103,6 +105,35 @@ class Enemy(pygame.sprite.Sprite):
         if self.type == "tracker":
             self.follow(self.characterX, self.characterY)
 
+            self.current_iteration = bin.functions.currentIterationChecker(self.current_iteration, self.animation_folder)
+            (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, self.animation_rate, self.current_iteration, self.frame, self.animation_frame)
+            self.image = pygame.transform.smoothscale(pygame.image.load(self.animation_folder + "/" + self.animation_frame).convert_alpha(), (75,75))
+            temporary = self.image.get_rect()
+            temporary.x = self.rect.x
+            temporary.y = self.rect.y
+            self.rect = temporary
+
+        if self.type == "horizontal":
+            if self.direction == "right":
+                self.animation_folder = "assets/enemyAnimations/walkR"
+                self.rect.x += self.speed
+                if self.rect.x > self.right_boundry:
+                    self.direction = "left"
+
+            if self.direction == "left":
+                self.animation_folder = "assets/enemyAnimations/walkL"
+                self.rect.x -= self.speed
+                if self.rect.x < self.left_boundry:
+                    self.direction = "right"
+
+            self.current_iteration = bin.functions.currentIterationChecker(self.current_iteration, self.animation_folder)
+            (self.animation_frame, self.current_iteration, self.frame) = bin.functions.animate(self.animation_folder, self.animation_rate, self.current_iteration, self.frame, self.animation_frame)
+            self.image = pygame.transform.smoothscale(pygame.image.load(self.animation_folder + "/" + self.animation_frame).convert_alpha(), (75,75))
+            temporary = self.image.get_rect()
+            temporary.x = self.rect.x
+            temporary.y = self.rect.y
+            self.rect = temporary
+
     def switchDirection(self):
         """
         Changes the direciton of the enemy
@@ -174,10 +205,15 @@ class Enemy(pygame.sprite.Sprite):
         characterY --> (int) the character's y coordinate
         return: none
         """
-        if self.rect.x < characterX:
+
+        if self.rect.x < characterX: ## right
             self.rect.x += self.speed
-        elif self.rect.x > characterX:
+            self.animation_folder = "assets/enemyAnimations/walkR"
+
+        elif self.rect.x > characterX: ## left
             self.rect.x -= self.speed
+            self.animation_folder = "assets/enemyAnimations/walkL"
+
         if self.rect.y < characterY:
             self.rect.y += self.speed
         elif self.rect.y > characterY:
