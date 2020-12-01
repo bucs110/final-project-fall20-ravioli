@@ -27,8 +27,8 @@ class Controller:
         self.swing = 0
         self.STATE = "start"
         self.current_wave = 0
-        self.wave_list = os.listdir("etc/waves")
-        self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
+        self.wave_list = os.listdir("assets/waves")
+        self.wave = "assets/waves/" + str(self.wave_list[self.current_wave])
         #print(self.wave_list)
         self.enemy_spawn_time = 100
         self.enemy_number = 0
@@ -344,7 +344,7 @@ class Controller:
 
 
             ## DETECTING IF PLAYER IS HIT AND DOING DAMAGE ##
-            player_get_hit = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(.65))
+            player_get_hit = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_rect_ratio(.65))
             if len(player_get_hit) > 0:
                 player_life = self.character.gotHit()
                 if player_life == "dead":
@@ -398,7 +398,7 @@ class Controller:
                 self.STATE = "victory"
 
             else:
-                self.wave = "etc/waves/" + str(self.wave_list[self.current_wave])
+                self.wave = "assets/waves/" + str(self.wave_list[self.current_wave])
                 self.STATE = "gameplay"
 
 
