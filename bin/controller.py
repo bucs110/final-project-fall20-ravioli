@@ -412,6 +412,9 @@ class Controller:
         return: none
         """
         self.background = bin.button.Button((0, 0), "assets/gui_design_victory.jpg", "null", (1500, 800))
+        pygame.mixer.music.stop()
+        victory_sound = pygame.mixer.Sound("assets/sounds/victorySound.wav")
+        victory_sound.play()
         while self.STATE == "victory":
             ## here check if new score object needs to be updated with the changeScore method in score class
 
@@ -434,7 +437,9 @@ class Controller:
         return: none
         """
         self.background = bin.button.Button((0, 0), "assets/gui_design_lose.jpg", "null", (1500, 800))
-
+        pygame.mixer.music.stop()
+        game_over_sound = pygame.mixer.Sound("assets/sounds/failureSound.wav")
+        game_over_sound.play()
         while self.STATE == "loseScreen":
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
