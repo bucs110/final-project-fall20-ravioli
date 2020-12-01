@@ -7,8 +7,8 @@ def randomDirection(count, direction):
     """
     determines if the enemy is finished walking its path and determines new direction
     Args:
-    count --> (int) the total number of steps the enemy is in its path
-    direction --> (str) direction that the enemy is walking
+    count --> (int) keeps count the total number of steps the enemy is in its path
+    direction --> (str) the direction that the enemy is walking
     Return: (str) direction
     """
     if count == 0:
