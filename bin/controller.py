@@ -101,6 +101,10 @@ class Controller:
         Args: none
         Return: none
         """
+        ## reading from json file when starting the game to get the past high score
+        fileref = open ("highScore.json","r")
+        score = json.load(fileref)
+        
         (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
         with open(self.wave, 'r') as file:
@@ -409,6 +413,12 @@ class Controller:
         """
         self.background = bin.button.Button((0, 0), "assets/gui_design_victory.jpg", "null", (1500, 800))
         while self.STATE == "victory":
+            ## here check if high score object needs to be updated with the changeScore method in score class
+
+            ## if it is a high score, write to the json file with the score that is in the highScore object from score class
+            fileref = open("highScore.json","w")
+            json.dump(newScore.__dict__, fileref)
+            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.STATE = "exit"
