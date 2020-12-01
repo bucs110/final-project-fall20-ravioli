@@ -5,13 +5,14 @@ import bin.functions
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, type, positionX, positionY, health, speed, boundaries):
         """
-        Initializes the enemies for the user
+        Initializes the enemies and their image, position, fighting stats and abilities, and enemy type
         Args:
         type --> (str) the given type for an enemy ## NOT FULLY IMPLEMENTED YET ##
         positionX --> (int) the enemy's inital X coordinate
         positionY --> (int) the enemy's inital Y coordinate
         speed --> (str) how many pixels the enemy moves with each step
         boundaries --> (touple) the world boundaries for the screen
+        Return: none
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.smoothscale(pygame.image.load("assets/enemyAnimations/walkR/enemyWalkR1.png").convert_alpha(), (75,75))
@@ -42,9 +43,10 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self):
         """
-        Updates the model for a single frame
+        Updates the model for a single frame; gives characteristics and abilities (speed and direction of movement)
+        to different types of enemies (roamer, tracker, horizontal)
         Args: None
-        Return:
+        Return: None
         """
         if self.type == "roamer":
             speed = 75
@@ -136,17 +138,17 @@ class Enemy(pygame.sprite.Sprite):
 
     def switchDirection(self):
         """
-        Changes the direciton of the enemy
+        Changes the direciton of the enemy to the opposite of its current direction
         Args: None
-        Return: None
+        Return: direction (str) the opposite direction of the current direction
         """
         self.direction = bin.functions.makeOppositeDirections(self.direction)
 
     def gotHit(self, damage):
         """
-        used to reduce the health of the enemy's health when it gets hit
+        used to reduce the enemy's health when it gets hit and plays sound depending on if enemy is dead or alive
         Args: None
-        Return: (str) alive or dead
+        Return: "dead" --> (str) enemy's health is at or below 0 and the enemy dies
         """
         ## add knockback ##
         self.damage = damage
@@ -161,11 +163,12 @@ class Enemy(pygame.sprite.Sprite):
 
     def knockBack(self, direction):
         """
-        Knocks back the user after being hit
-        Args:
-        direction --> (str) the character's direction
+        Knocks back the enemy 75 pixels in the opposite direction after being hit or until it hits the
+        boundary if it would otherwise go out of frame
+        Args: direction --> (str) the enemy's direction
         Return: None
         """
+
         bounce_back = 75
 
         self.direction = direction
@@ -199,7 +202,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def follow(self, characterX, characterY):
         """
-        Moves the enemy to follow the character
+        Makes the enemy to follow the character's position
         args:
         characterX --> (int) the character's x coordinate
         characterY --> (int) the character's y coordinate

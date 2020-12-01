@@ -4,11 +4,12 @@ import bin.functions
 class Character(pygame.sprite.Sprite):
     def __init__(self, position, filename, boundaries):
         """
-        initialzes the user's Character
+        initialzes the user's character and its position, image, boundaries, and fighting stats and abilities
         Args:
         position --> (touple) the character's (x,y) coordinates
         filename --> (str) the name of the file of the character's image
         boundaries --> (touple) the limits to where the character can move
+        return: none
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(filename)
@@ -42,7 +43,7 @@ class Character(pygame.sprite.Sprite):
         """
         Moves the character upwards
         Args: none
-        Return:None
+        Return: none
         """
         if self.STATE  == "movement":
             if self.rect.y > self.upper_boundry:
@@ -53,7 +54,7 @@ class Character(pygame.sprite.Sprite):
 
     def moveDown(self):
         """
-        Moves the character upwards
+        Moves the character downwards
         Args: none
         Return: None
         """
@@ -65,9 +66,9 @@ class Character(pygame.sprite.Sprite):
 
     def moveRight(self):
         """
-        Moves the character upwards
+        Moves the character right
         Args: none
-        Return: None
+        Return: none
         """
         if self.STATE  == "movement":
             if self.rect.x < self.right_boundry:
@@ -77,9 +78,9 @@ class Character(pygame.sprite.Sprite):
 
     def moveLeft(self):
         """
-        Moves the character upwards
+        Moves the character left
         Args: none
-        Return:None
+        Return: none
         """
         if self.STATE  == "movement":
             if self.rect.x > self.left_boundry:
@@ -89,9 +90,11 @@ class Character(pygame.sprite.Sprite):
 
     def gotHit(self):
         """
-        used to reduce the health of the character when it gets hit
+        used to reduce the health of the character by 10 when it gets hit and determines if the character
+        is alive or dead by its amount of health left
         Args: None
-        Return: (str) alive or dead
+        Return: "alive" (str) character is still alive and some health remains
+                "dead" (str) character is dead and all health is gone
         """
         if self.got_hit_cooldown == 0:
             self.health -= 10
@@ -104,7 +107,8 @@ class Character(pygame.sprite.Sprite):
 
     def knockBack(self):
         """
-        Knocks back the user after being hit
+        Knocks back the character 75 pixels in the opposite direction after being hit or until it hits the
+        boundary if it would otherwise go out of frame
         Args: None
         Return: None
         """
@@ -140,13 +144,13 @@ class Character(pygame.sprite.Sprite):
         """
         get the current position and direction of the character
         args: None
-        Return: (touple) the characters position and direction
+        Return: self.rect.x, self.rect.y, self.direction (touple) the characters position and direction
         """
         return (self.rect.x, self.rect.y, self.direction)
 
     def attackMode(self):
         """
-        changes the state of the character to attack
+        changes the state of the character to attack and gives the character a cool down after it attacks
         Args: none
         Return: None
         """
@@ -165,7 +169,7 @@ class Character(pygame.sprite.Sprite):
 
     def idleMode(self):
         """
-        Changes the animation folder if the character is idle
+        Uses the animation folder to make the character look idle if the character is idle
         Args: None
         Return: None
         """

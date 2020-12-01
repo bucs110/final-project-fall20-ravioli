@@ -32,7 +32,7 @@ def makeOppositeDirections(direction):
     Takes in a direction and returns the opposite direction
     Args:
     direction --> (str) the direction the object is moving in
-    Return --> (str) the opposite direction
+    Return: direction --> (str) the opposite direction of the current direction
     """
     direction = direction
     if direction == "up":
@@ -75,7 +75,7 @@ def currentIterationChecker(current_iteration, folder):
     args:
     current_iteration --> (int) --> the current photo being accessed
     folder --> (str) folder with the files needed for the animation
-    return current_iteration
+    return: current_iteration (int) current photo being processed
     """
     if current_iteration > (len(os.listdir(folder)) - 1):
         current_iteration = 0
@@ -83,12 +83,12 @@ def currentIterationChecker(current_iteration, folder):
 
 def spawnEnemy(filename, boundaries, enemy_number):
     """
-    Takes the wave values from a file a saves them into variables
+    Takes the wave values from a file and saves them into variables
     Args:
     filename --> (str) the name of the text file with the wave information
     boundaries --> (touple) pixel limitations for the enemy movement
     enemy_number --> (int) the enemy's place in the wave lineup
-    Return: (obj) --> the enemy object
+    Return: enemy --> (obj) the enemy object
     """
     with open(filename, 'r') as file:
         wave_information = file.readlines()

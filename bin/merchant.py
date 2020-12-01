@@ -5,11 +5,12 @@ import bin.button
 class Merchant(pygame.sprite.Sprite):
     def __init__(self, position, filename, type):
         """
-        initilzes the merchant
+        initializes the merchant and its image, the type of merchant, and its position
         Args:
         position --> (touple) the character's (x,y) coordinates
         filename --> (str) the name of the file of the character's image
         type --> (str) the type of merchant
+        return: none
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.smoothscale(pygame.image.load("assets/merchantAnimations/blue/blueMerchant1.png").convert_alpha(), (48, 64))
@@ -27,7 +28,7 @@ class Merchant(pygame.sprite.Sprite):
 
     def update(self):
         """
-        Used for updating the animation frame for the merchant
+        Updates the animation frame for the merchant
         args: None
         return: none
         """

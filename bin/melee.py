@@ -11,6 +11,7 @@ class Melee(pygame.sprite.Sprite):
         Args:
         sword_length --> (int) pixel length of the sword
         filename --> (str) the name of the file of the character's image
+        return: none
         """
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(filename)
@@ -28,6 +29,7 @@ class Melee(pygame.sprite.Sprite):
         Args:
         position --> (touple) position of the character
         direction --> (str) the direction the character is facing
+        return: none
         """
         (character_x, character_y, direction) = (position_and_direction[0], position_and_direction[1], position_and_direction[2])
         if direction == "up":
@@ -49,7 +51,7 @@ class Melee(pygame.sprite.Sprite):
 
     def draw(self, screen):
         """
-        Used to draw and update the enemy class
+        Used to draw and update the enemy class and sword image
         Args: None
         Return: None
         """
