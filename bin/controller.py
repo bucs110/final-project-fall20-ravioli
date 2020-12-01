@@ -365,9 +365,9 @@ class Controller:
             self.all_sprites.update()
             self.display.fill((0, 0, 0)) #139 244 255
 
-            self.display.blit(health_display, (210,0))
-            self.display.blit(money_display, (610,0))
-            self.display.blit(wave_display, (1010,0))
+            self.display.blit(health_display, (360, 10))
+            self.display.blit(money_display, (645, 10))
+            self.display.blit(wave_display, (980, 10))
             self.display.blit(wave_complete_display, (300, 730))
             self.display.blit(lever_display, (625, 450))
 
