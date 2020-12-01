@@ -89,7 +89,7 @@ class Controller:
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_e:
-                        self.STATE = "gameplay"
+                    	self.STATE = "gameplay"
 
             self.display.fill((255, 255, 255))
             self.display.blit(self.background.image, self.background.rect)
