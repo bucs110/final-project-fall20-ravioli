@@ -104,7 +104,7 @@ class Controller:
         ## reading from json file when starting the game to get the past high score
         #fileref = open ("highScore.json","r")
         #score = json.load(fileref)
-        
+
         (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
         with open(self.wave, 'r') as file:
@@ -179,6 +179,7 @@ class Controller:
                                         self.character.total_money -= 250
                                         self.character.upgrade_level += 1
                                         self.character.damage_output = 10
+                                        self.character.upgrade_color = "cyan"
                                         e.kill()
                                         self.tier_iii_upgrade = bin.button.Button(self.upgrade_button_location, "assets/upgrade_iii.png", "upgrade_iii", self.button_size)
                                         self.sale_items.add(self.tier_iii_upgrade)
@@ -421,7 +422,7 @@ class Controller:
             ## if it is a new high score, write to the json file with the score that is in the highScore object from score class
             #fileref = open("highScore.json","w")
             #json.dump(newScore.__dict__, fileref)
-            
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.STATE = "exit"
