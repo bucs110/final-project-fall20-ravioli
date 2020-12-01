@@ -50,9 +50,9 @@ class Controller:
 
         ##ESTABLISH BUTTON LOCATIONS##
         self.button_size = (250, 64)
-        self.health_button_location = (530, 80)
-        self.upgrade_button_location = (230, 80)
-        self.speed_button_location = (830, 80)
+        self.health_button_location = (629, 80)
+        self.upgrade_button_location = (329, 80)
+        self.speed_button_location = (929, 80)
 
     def mainloop(self):
         """
@@ -174,7 +174,6 @@ class Controller:
                                     if self.character.upgrade_level == 1 and self.character.total_money >= 250:
                                         self.character.total_money -= 250
                                         self.character.upgrade_level += 1
-                                        self.character.hit_ratio = 1.5
                                         self.character.damage_output = 10
                                         e.kill()
                                         self.tier_iii_upgrade = bin.button.Button(self.upgrade_button_location, "assets/upgrade_iii.png", "upgrade_iii", self.button_size)
@@ -184,8 +183,8 @@ class Controller:
                                     if self.character.upgrade_level == 2 and self.character.total_money >= 500:
                                         self.character.total_money -= 500
                                         self.character.upgrade_level += 1
-                                        self.character.hit_ratio = 2.0
                                         self.character.damage_output = 20
+                                        self.character.upgrade_color = "pink"
                                         e.kill()
                                         self.maxed_out = bin.button.Button(self.upgrade_button_location, "assets/maxed_out.png", "null", self.button_size)
                                         self.sale_items.add(self.maxed_out)
@@ -241,9 +240,9 @@ class Controller:
                     wave_complete_display = self.complete_font.render("Walk up to merchants and click the buttons to upgrade.", False, (255, 255, 0))
                     lever_display = self.lever_font.render("Press [ e ] to start the next wave", False, (255, 255, 255))
                     self.wave_lever = bin.button.Button((700, 400), "assets/waveLever.png", "null", (50,50))
-                    self.upgrade_merchant = bin.merchant.Merchant((300, 150), "assets/merchantAnimations/gold", "upgrade")
-                    self.health_merchant = bin.merchant.Merchant((600, 150), "assets/merchantAnimations/red", "health")
-                    self.speed_merchant = bin.merchant.Merchant((900, 150), "assets/merchantAnimations/blue", "speed")
+                    self.upgrade_merchant = bin.merchant.Merchant((399, 150), "assets/merchantAnimations/gold", "upgrade")
+                    self.health_merchant = bin.merchant.Merchant((699, 150), "assets/merchantAnimations/red", "health")
+                    self.speed_merchant = bin.merchant.Merchant((999, 150), "assets/merchantAnimations/blue", "speed")
                     self.all_sprites.add(self.wave_lever, self.upgrade_merchant, self.health_merchant, self.speed_merchant)
                     self.wave_reset.add(self.wave_lever)
                     self.merchants.add(self.upgrade_merchant, self.health_merchant, self.speed_merchant)

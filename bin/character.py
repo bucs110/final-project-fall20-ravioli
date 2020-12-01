@@ -27,13 +27,15 @@ class Character(pygame.sprite.Sprite):
         self.got_hit_cooldown = 0
         self.total_money = 2000
         self.upgrade_level = 1
+        self.upgrade_color = "orange"
+
         self.damage_output = 5
 
         ## animation variables ##
         self.animation_frame = "idleR1.png"
         self.current_iteration = 0
         self.frame = 0
-        self.animation_folder = "assets/orangeKnightAnimations/idleR"
+        self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/idleR"
         self.animation_rate = 2
 
     def moveUp(self):
@@ -46,7 +48,7 @@ class Character(pygame.sprite.Sprite):
             if self.rect.y > self.upper_boundry:
                 self.rect.y -= self.speed
             self.direction = "up"
-            self.animation_folder = "assets/orangeKnightAnimations/walkU"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/walkU"
 
 
     def moveDown(self):
@@ -59,7 +61,7 @@ class Character(pygame.sprite.Sprite):
             if self.rect.y < self.lower_boundry:
                 self.rect.y += self.speed
             self.direction = "down"
-            self.animation_folder = "assets/orangeKnightAnimations/walkD"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/walkD"
 
     def moveRight(self):
         """
@@ -71,7 +73,7 @@ class Character(pygame.sprite.Sprite):
             if self.rect.x < self.right_boundry:
                 self.rect.x += self.speed
             self.direction = "right"
-            self.animation_folder = "assets/orangeKnightAnimations/walkR"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/walkR"
 
     def moveLeft(self):
         """
@@ -83,7 +85,7 @@ class Character(pygame.sprite.Sprite):
             if self.rect.x > self.left_boundry:
                 self.rect.x -= self.speed
             self.direction = "left"
-            self.animation_folder = "assets/orangeKnightAnimations/walkL"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/walkL"
 
     def gotHit(self):
         """
@@ -113,22 +115,22 @@ class Character(pygame.sprite.Sprite):
         bounce_back = 75
         self.direction = bin.functions.makeOppositeDirections(self.direction)
         if self.direction == "up":
-            self.animation_folder = "assets/orangeKnightAnimations/damageD"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/damageD"
             self.rect.y -= bounce_back
             if self.rect.y < self.upper_boundry:
                 self.rect.y = self.upper_boundry
         elif self.direction == "down":
-            self.animation_folder = "assets/orangeKnightAnimations/damageU"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/damageU"
             self.rect.y += bounce_back
             if self.rect.y > self.lower_boundry:
                 self.rect.y = self.lower_boundry
         elif self.direction == "right":
-            self.animation_folder = "assets/orangeKnightAnimations/damageL"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/damageL"
             self.rect.x += bounce_back
             if self.rect.x > self.right_boundry:
                 self.rect.x = self.right_boundry
         elif self.direction == "left":
-            self.animation_folder = "assets/orangeKnightAnimations/damageR"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/damageR"
             self.rect.x -= bounce_back
             if self.rect.x < self.left_boundry:
                 self.rect.x = self.left_boundry
@@ -152,13 +154,13 @@ class Character(pygame.sprite.Sprite):
         self.current_iteration = 0
         self.attack_cooldown = 8 * self.animation_rate
         if self.direction == "right":
-            self.animation_folder = "assets/orangeKnightAnimations/attackR"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/attackR"
         elif self.direction == "left":
-            self.animation_folder = "assets/orangeKnightAnimations/attackL"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/attackL"
         elif self.direction == "up":
-            self.animation_folder = "assets/orangeKnightAnimations/attackU"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/attackU"
         elif self.direction == "down":
-            self.animation_folder = "assets/orangeKnightAnimations/attackD"
+            self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/attackD"
 
 
     def idleMode(self):
@@ -169,13 +171,13 @@ class Character(pygame.sprite.Sprite):
         """
         if self.STATE  == "movement":
             if self.direction == "right":
-                self.animation_folder = "assets/orangeKnightAnimations/idleR"
+                self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/idleR"
             elif self.direction == "left":
-                self.animation_folder = "assets/orangeKnightAnimations/idleL"
+                self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/idleL"
             elif self.direction == "up":
-                self.animation_folder = "assets/orangeKnightAnimations/idleU"
+                self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/idleU"
             elif self.direction == "down":
-                self.animation_folder = "assets/orangeKnightAnimations/idleD"
+                self.animation_folder = "assets/" + self.upgrade_color + "KnightAnimations/idleD"
 
     def update(self):
         """
