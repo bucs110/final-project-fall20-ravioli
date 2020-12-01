@@ -30,8 +30,6 @@ This is the screen the player sees while buying from merchants in-between rounds
  *![gui design](assets/gui_design_victory.jpg)
  This is the screen the player sees if they win the game.
 
-* << You should also have a screenshot of each screen for your final GUI >>
-
 ***        
 
 ## Program Design
