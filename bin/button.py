@@ -3,12 +3,13 @@ import pygame
 class Button(pygame.sprite.Sprite):
     def __init__(self, position, filename, use, size):
         """
-        initialzes a button object
+        initialzes a button object including size, location, usage, and a file
         args:
         position --> (touple) the buttons location on the screen
         filename --> (str) the file for the png of the button
         use --> (str) a string for what the button is used for
         size --> (touple) the size for the button
+        return: none
         """
         self.size = size
         pygame.sprite.Sprite.__init__(self)
