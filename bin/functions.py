@@ -114,6 +114,10 @@ def convertTime(millis):
     args: millis (int) --> the time wished to be converted in milliseconds
     return: (int) the seconds, minutes, and hours
     """
-    seconds = (millis/1000)%60
-    minutes = (millis/(1000*60))%60
-    return (seconds, minutes)
+    minutes = 0
+    seconds = (millis//1000)
+    while seconds > 60:
+        seconds -= 60
+        minutes += 1
+    total_time = str(minutes) + " minutes and " + str(seconds) + " seconds."
+    return (total_time)

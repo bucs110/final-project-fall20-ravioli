@@ -98,7 +98,7 @@ class Character(pygame.sprite.Sprite):
         """
         if self.got_hit_cooldown == 0:
             self.health -= 10
-        print(str(self.health) + " character")
+        #print(str(self.health) + " character")
         if self.health == 0:
             return "dead"
         else:

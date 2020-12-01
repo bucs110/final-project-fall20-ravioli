@@ -5,8 +5,10 @@ import bin.functions
 import bin.melee
 import bin.merchant
 import bin.button
+import bin.score
 import os
 import time
+import json
 
 class Controller:
     def __init__(self):
@@ -53,6 +55,15 @@ class Controller:
         self.health_button_location = (629, 80)
         self.upgrade_button_location = (329, 80)
         self.speed_button_location = (929, 80)
+
+        ##ESTABLISH PREVIOUS BEST TIME##
+        ## reading from json file when starting the game to get the past high score
+        fileref = open ("assets/highScore.json","r")
+        score = json.load(fileref)
+        self.best_time = score["bestTime"]
+        print(score)
+        print(score["bestTime"])
+        fileref.close
 
     def mainloop(self):
         """
@@ -101,9 +112,6 @@ class Controller:
         Args: none
         Return: none
         """
-        ## reading from json file when starting the game to get the past high score
-        #fileref = open ("highScore.json","r")
-        #score = json.load(fileref)
         self.background = bin.button.Button((0, 0), "assets/dungeonArena.jpg", "null", (1500, 800))
         (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
@@ -417,15 +425,21 @@ class Controller:
         pygame.mixer.music.stop()
         victory_sound = pygame.mixer.Sound("assets/sounds/victorySound.wav")
         victory_sound.play()
+
+        ## Logic for best time mechanic ##
         total_game_time = pygame.time.get_ticks()
         print(bin.functions.convertTime(total_game_time))
+
+        best_score = bin.score.Score(self.best_time)
+        new_best_score = best_score.changeScore(total_game_time)
+
+        fileref = open("assets/highScore.json", "w")
+        json.dump(best_score.__dict__, fileref)
+        fileref.close()
+        print(self.character.__dict__)
+
+
         while self.STATE == "victory":
-            ## here check if new score object needs to be updated with the changeScore method in score class
-
-            ## if it is a new high score, write to the json file with the score that is in the highScore object from score class
-            #fileref = open("highScore.json","w")
-            #json.dump(newScore.__dict__, fileref)
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.STATE = "exit"
