@@ -413,9 +413,9 @@ class Controller:
         """
         self.background = bin.button.Button((0, 0), "assets/gui_design_victory.jpg", "null", (1500, 800))
         while self.STATE == "victory":
-            ## here check if high score object needs to be updated with the changeScore method in score class
+            ## here check if new score object needs to be updated with the changeScore method in score class
 
-            ## if it is a high score, write to the json file with the score that is in the highScore object from score class
+            ## if it is a new high score, write to the json file with the score that is in the highScore object from score class
             fileref = open("highScore.json","w")
             json.dump(newScore.__dict__, fileref)
             
