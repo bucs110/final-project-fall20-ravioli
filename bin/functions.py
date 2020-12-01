@@ -107,3 +107,13 @@ def spawnEnemy(filename, boundaries, enemy_number):
 
     enemy = bin.enemy.Enemy(type[1], int(coordinateX[1]), int(coordinateY[1]), int(health[1]), png[1], boundaries)
     return enemy
+
+def convertTime(millis):
+    """
+    Converts milliseconds into seconds and minutes
+    args: millis (int) --> the time wished to be converted in milliseconds
+    return: (int) the seconds, minutes, and hours
+    """
+    seconds = (millis/1000)%60
+    minutes = (millis/(1000*60))%60
+    return (seconds, minutes)

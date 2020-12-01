@@ -104,7 +104,7 @@ class Controller:
         ## reading from json file when starting the game to get the past high score
         #fileref = open ("highScore.json","r")
         #score = json.load(fileref)
-
+        self.background = bin.button.Button((0, 0), "assets/dungeonArena.jpg", "null", (1500, 800))
         (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
         with open(self.wave, 'r') as file:
@@ -368,7 +368,8 @@ class Controller:
 
             ##SCREEN UPDATES##
             self.all_sprites.update()
-            self.display.fill((0, 0, 0)) #139 244 255
+            self.display.fill((255, 255, 255))
+            self.display.blit(self.background.image, self.background.rect)
 
             self.display.blit(health_display, (360, 10))
             self.display.blit(money_display, (645, 10))
@@ -416,6 +417,8 @@ class Controller:
         pygame.mixer.music.stop()
         victory_sound = pygame.mixer.Sound("assets/sounds/victorySound.wav")
         victory_sound.play()
+        total_game_time = pygame.time.get_ticks()
+        print(bin.functions.convertTime(total_game_time))
         while self.STATE == "victory":
             ## here check if new score object needs to be updated with the changeScore method in score class
 
