@@ -33,7 +33,7 @@ This the the screen the player sees while playing the game.
 ***        
 
 ## Program Design
-* Non-Standard libraries
+* Standard libraries
     * Random
 	    * https://docs.python.org/3/library/random.html
 	    * The random module is a psuedo-random number generator.
@@ -83,23 +83,25 @@ This the the screen the player sees while playing the game.
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Press "W" key  | Knight moves up and stays within the screen  |          |
-|  2  | Press "A" key  | Knight moves left and stays within screen |                 |
-|  3  | Press "S" key  | Knight moves down and stays within the screen  |          |
-|  4  | Press "D" key  | Knight moves right and stays within screen |                 |
-|  5  | Press spacebar  | Knight swings sword and slashing sound is made  |          |
-|  6  | Press "W" and "A" keys  | Knight moves to the upper left diagonal and stays within screen |                 |
-|  7  | Press "W" and "D" keys  | Knight moves to the upper right diagonal and stays within the screen  |          |
-|  8  | Press "S" and "A" keys  | Knight moves to the lower left diagonal and stays within screen |                 |
-|  9  | Press "S" and "D" keys  | Knight moves to the lower right diagonal and stays within the screen  |          |
-|  10  | Move to within BLANK pixels of enemy and press spacebar  | The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back, and the enemy loses health. |                 |
-|  11  | Enemy comes within BLANK pixels of the knight and spacebar is not pressed  | Knight bounces back, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.  |          |
-|  12  | Overlap knight with lever on screen with merchants and press "E" key  | The lever handle flips, makes a BLANK NOISE, and another round of gameplay with a new wave begins.  |                 |
-|  13  | Move knight to within BLANK pixels of yellow wizard on merchant screen  | Button for exchange of money for BLANK power up appears  |          |
-|  14  | Move knight to within BLANK pixels of Red wizard on merchant screen  | Button for exchange of money for an increase in health appears |                 |
-|  15  | Move knight to within BLANK pixels of blue wizard on merchant screen  | Button for exchange of money for speed appears  |          |
-|  16  | Click on button from yellow knight  | Money count decreases by 250 EXPAND |                 |
-|  17  | Click on button from red knight  | Money count decreases by 10 and health count increases by 10.  |          |
-|  18  | Click on button from red knight  | Money count decreases by 50 and knight is BLANK times faster in the next round of gameplay. EXPAND BC CHANGING AMOUNTS OF MONEY |                 |
-|  3  | Press "S" key  | Knight moves down and stays within the screen  |          |
-|  2  | Press "D" key  | Knight moves right and stays within screen |                 |
+|  1  | Press "W" key  | Knight moves up and stays within the screen  |  Knight moves up and stays within the screen         |
+|  2  | Press "A" key  | Knight moves left and stays within screen |   Knight moves left and stays within screen              |
+|  3  | Press "S" key  | Knight moves down and stays within the screen  | Knight moves down and stays within the screen         |
+|  4  | Press "D" key  | Knight moves right and stays within screen |   Knight moves right and stays within screen              |
+|  5  | Press spacebar  | Knight swings sword and slashing sound is made  |  Knight swings sword and slashing sound is made        |
+|  6  | Press "W" and "A" keys  | Knight moves to the upper left diagonal and stays within screen |  Knight moves to the upper left diagonal and stays within screen               |
+|  7  | Press "W" and "D" keys  | Knight moves to the upper right diagonal and stays within the screen  |  Knight moves to the upper right diagonal and stays within the screen        |
+|  8  | Press "S" and "A" keys  | Knight moves to the lower left diagonal and stays within screen | Knight moves to the lower left diagonal and stays within screen                |
+|  9  | Press "S" and "D" keys  | Knight moves to the lower right diagonal and stays within the screen  | Knight moves to the lower right diagonal and stays within the screen         |
+|  10  | Move to within attack range of enemy and press spacebar  | The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by 10. |   The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by 10.         |
+|  11  | Enemy comes within attack range of the knight and spacebar is not pressed  | Knight bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.  | night bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.         |
+|  12  | Overlap knight with lever on screen with merchants and user presses "E" key  | The lever handle flips, makes a clicking noise, and another round of gameplay with a new wave begins.  |   The lever handle flips, makes a clicking noise, and another round of gameplay with a new wave begins.              |
+|  13  | Move knight to within range of yellow wizard on merchant screen until a yellow button pops up | Button for exchange of money for an increase in damage output appears  |  Button for exchange of money for an increase in damage output appears        |
+|  14  | Move knight to within range of Red wizard on merchant screen until a red button pops up  | Button for exchange of money for an increase in health appears |   Button for exchange of money for an increase in health appears              |
+|  15  | Move knight to within range of blue wizard on merchant screen  until a blue button pops up | Button for exchange of money for an increase in speed appears  |    Button for exchange of money for an increase in speed appears      |
+|  16  | Click on button from yellow wizard for the first time  | Money count decreases by 250 and attack damage doubles |    Money count decreases by 250 and attack damage doubles             |
+|  17  | Click on button from yellow wizard for the second time  | Money count decreases by 500 and attack damage doubles again |    Money count decreases by 500 and attack damage doubles again            |
+|  18  | Click on button from red wizard  | Money count decreases by 10 and health count increases by 10.  |  Money count decreases by 10 and health count increases by 10.        |
+|  19  | Click on button from blue wizard  | Money count decreases by 50 and knight is one unit faster  in the next round of gameplay.  | Money count decreases by 50 and knight is one unit faster  in the next round of gameplay.           |
+|  20  | Click on button from blue wizard  | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.  | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.           |
+|  21  | Press "L" key and "control" key at the same time | The game exits.  |   The game exits.       |
+|  22  |On the start screen, press the key "E" | The game starts |     The game starts            |
