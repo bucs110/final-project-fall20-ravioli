@@ -102,8 +102,8 @@ class Controller:
         Return: none
         """
         ## reading from json file when starting the game to get the past high score
-        fileref = open ("highScore.json","r")
-        score = json.load(fileref)
+        #fileref = open ("highScore.json","r")
+        #score = json.load(fileref)
         
         (up, down, left, right, reset_click, sword, sword_cooldown) = (False, False, False, False, False, 50, 50)
         clock = pygame.time.Clock()
@@ -416,8 +416,8 @@ class Controller:
             ## here check if new score object needs to be updated with the changeScore method in score class
 
             ## if it is a new high score, write to the json file with the score that is in the highScore object from score class
-            fileref = open("highScore.json","w")
-            json.dump(newScore.__dict__, fileref)
+            #fileref = open("highScore.json","w")
+            #json.dump(newScore.__dict__, fileref)
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
