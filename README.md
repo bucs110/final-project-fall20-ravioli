@@ -31,7 +31,7 @@ This is the screen the player sees while playing the game.
  This is the screen the player sees when they begin the game.
 *![gui design](assets/gui_final_fighting.jpg)
 This is the screen the player sees while playing the game and fighting enemies.
-*![gui design](assets/gui_design_merchants.jpg)
+*![gui design](assets/gui_final_merchants.jpg)
 This is the screen the player sees while buying from merchants in-between rounds of gameplay.
  *![gui design](assets/gui_design_lose.jpg)
  This is the screen the player sees if they lose the game.
@@ -100,7 +100,7 @@ Front-end lead conducted significant research on animations and general GUI desi
 |  8  | Press "W" and "D" keys  | Knight moves to the upper right diagonal and stays within the screen  |  Knight moves to the upper right diagonal and stays within the screen        |
 |  9  | Press "S" and "A" keys  | Knight moves to the lower left diagonal and stays within screen | Knight moves to the lower left diagonal and stays within screen                |
 |  10  | Press "S" and "D" keys  | Knight moves to the lower right diagonal and stays within the screen  | Knight moves to the lower right diagonal and stays within the screen         |
-|  11  | Move to within attack range of enemy and press spacebar  | The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by 10. |   The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by 10.         |
+|  11  | Move to within attack range of enemy and press spacebar  | The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by the amount of health that the enemy had. |   The sword swings, a slashing sound is made, the enemy makes a hissing noise, the enemy bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, and the enemy loses 10 health points. If the enemy dies, then money count increases by the amount of health that the enemy had.         |
 |  12  | Enemy comes within attack range of the knight and spacebar is not pressed  | Knight bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.  | night bounces back 75 pixels or until it hits the boundary if it is less than 75 pixels away from the boundary, a hitting noise is made, a splash of purple appears, and the health count decreases by 10.         |
 |  13  | Overlap knight with lever on screen with merchants and user presses "E" key  | The lever handle flips and another round of gameplay with a new wave begins.  |   The lever handle flips and another round of gameplay with a new wave begins.              |
 |  14  | Move knight to within range of yellow wizard on merchant screen until a button pops up | Button for exchange of money for an increase in damage output appears  |  Button for exchange of money for an increase in damage output appears        |
@@ -110,5 +110,5 @@ Front-end lead conducted significant research on animations and general GUI desi
 |  18  | Click on button from yellow wizard for the second time  | Money count decreases by 500 and attack damage doubles again |    Money count decreases by 500 and attack damage doubles again            |
 |  19  | Click on button from red wizard  | Money count decreases by 10 and health count increases by 10.  |  Money count decreases by 10 and health count increases by 10.        |
 |  20  | Click on button from purple wizard  | Money count decreases by 50 and knight is one unit faster  in the next round of gameplay.  | Money count decreases by 50 and knight is one unit faster in the next round of gameplay.           |
-|  21  | Click on button from purple wizard  | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.  | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.           |
+|  21  | Click on button from purple wizard for the second time | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.  | Money count decreases by 100 and knight is one more unit faster in the next round of gameplay.           |
 |  22  | Press the left "control" key. | The game exits.  |   The game exits.       |
