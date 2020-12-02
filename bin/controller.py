@@ -151,8 +151,6 @@ class Controller:
                     if event.key == pygame.K_SPACE:
                         if self.swing == 0:
                             self.character.attackMode()
-                            sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
-                            sword_swoosh.play()
                             self.swing += 1
                     if event.key == pygame.K_e:
                         reset_click = True
@@ -169,7 +167,9 @@ class Controller:
                     if event.key == pygame.K_s:
                         down = False
                     if event.key == pygame.K_SPACE:
-                        pass
+                    	sword_swoosh = pygame.mixer.Sound("assets/sounds/attackSound.wav")
+                    	sword_swoosh.play()
+                    	pass
                     if event.key == pygame.K_e:
                         reset_click = False
 
