@@ -21,12 +21,12 @@ class Character(pygame.sprite.Sprite):
         self.direction = "right"
         self.STATE = "movement"
 
-        self.speed = 10
+        self.speed = 3
         self.hit_ratio = 1.0
         self.health = 100
         self.attack_cooldown = 0
         self.got_hit_cooldown = 0
-        self.total_money = 2000
+        self.total_money = 0
         self.upgrade_level = 1
         self.upgrade_color = "orange"
 

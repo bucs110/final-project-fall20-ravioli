@@ -58,7 +58,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.count += 1
                 if self.rect.y == self.upper_boundry:
                     self.direction = "down"
-                if self.count == speed:
+                if self.count > speed:
                     self.count = 0
             if self.direction == "down" and self.rect.y < self.lower_boundry:
                 self.animation_state = "ACTIVE"
@@ -66,7 +66,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.count += 1
                 if self.rect.y == self.lower_boundry:
                     self.direction = "up"
-                if self.count == speed:
+                if self.count > speed:
                     self.count = 0
             if self.direction == "right" and self.rect.x < self.right_boundry:
                 self.animation_state = "ACTIVE"
@@ -75,7 +75,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.count += 1
                 if self.rect.x == self.right_boundry:
                     self.direction = "left"
-                if self.count == speed:
+                if self.count > speed:
                     self.count = 0
             if self.direction == "left" and self.rect.x > self.left_boundry:
                 self.animation_state = "ACTIVE"
@@ -84,12 +84,12 @@ class Enemy(pygame.sprite.Sprite):
                 self.count += 1
                 if self.rect.x == self.left_boundry:
                     self.direction = "right"
-                if self.count == speed:
+                if self.count > speed:
                     self.count = 0
             if self.direction == "none":
                 self.animation_state == "INACTIVE"
                 self.count += self.speed
-                if self.count == speed:
+                if self.count > speed:
                     self.count = 0
 
             if self.animation_state == "ACTIVE":

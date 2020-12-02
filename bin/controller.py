@@ -64,8 +64,8 @@ class Controller:
         fileref = open ("assets/highScore.json","r")
         score = json.load(fileref)
         self.best_time = score["bestTime"]
-        print(score)
-        print(score["bestTime"])
+        #print(score)
+        #print(score["bestTime"])
         fileref.close
 
     def mainloop(self):
