@@ -22,10 +22,10 @@ class Controller:
         pygame.font.init()
         ##INITIALIZE SCREEN, SPRITES, AND STATE##
         self.display = pygame.display.set_mode((1500, 800), pygame.RESIZABLE)
-        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (100, 700, 100, 1400)
+        (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry) = (130, 600, 100, 1290)
         self.boundaries = (self.upper_boundry, self.lower_boundry, self.left_boundry, self.right_boundry)
 
-        self.character = bin.character.Character((100, 100), "assets/resized_ravioli.png", self.boundaries)
+        self.character = bin.character.Character((650, 320), "assets/resized_ravioli.png", self.boundaries)
 
 
         self.swing = 0
@@ -433,10 +433,10 @@ class Controller:
 
         ## Logic for best time mechanic ##
         total_game_time = pygame.time.get_ticks()
-        print(bin.functions.convertTime(total_game_time))
         best_score = bin.score.Score(self.best_time)
         new_best_score = best_score.changeScore(total_game_time)
 
+        ## Access the highScore file and overwrite the current high score if the player completes the game in a faster time frame ##
         fileref = open("assets/highScore.json", "w")
         json.dump(best_score.__dict__, fileref)
         fileref.close()

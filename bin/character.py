@@ -21,7 +21,7 @@ class Character(pygame.sprite.Sprite):
         self.direction = "right"
         self.STATE = "movement"
 
-        self.speed = 3
+        self.speed = 10
         self.hit_ratio = 1.0
         self.health = 100
         self.attack_cooldown = 0

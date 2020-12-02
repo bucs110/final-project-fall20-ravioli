@@ -1,5 +1,4 @@
 import pygame
-import bin.controller
 
 class Score():
     def __init__ (self, highScore):
@@ -17,7 +16,5 @@ class Score():
         args: newScore --> (int) the score that the current player earned in the game
         return: none
         """
-        #check if new high score or not and update that object here
-        #pass in new score from game and compare with high score- keep track of new score in controller separatley and pass it in here
         if newScore < self.bestTime:
             self.bestTime = newScore
