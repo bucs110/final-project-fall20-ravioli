@@ -331,7 +331,7 @@ class Controller:
                         e.kill()
 
 
-            ## There are a bit of hardcoded values / magic numbers here but I just wanted to get it working ##
+            ## Specifies the sword to only check for content when the sword is swinging ##
             if self.swing > 0:
                 if self.swing > 10 and self.swing < 12:
                     sword_swing = pygame.sprite.spritecollide(self.character, self.all_enemies, False, pygame.sprite.collide_circle_ratio(self.character.hit_ratio))
