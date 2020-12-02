@@ -208,8 +208,9 @@ class Enemy(pygame.sprite.Sprite):
         characterY --> (int) the character's y coordinate
         return: none
         """
-
-        if self.rect.x < characterX: ## right
+        if self.rect.x == characterX:
+            pass
+        elif self.rect.x < characterX: ## right
             self.rect.x += self.speed
             self.animation_folder = "assets/enemyAnimations/walkR"
 
@@ -217,7 +218,9 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.x -= self.speed
             self.animation_folder = "assets/enemyAnimations/walkL"
 
-        if self.rect.y < characterY:
+        if self.rect.y == characterY:
+            pass
+        elif self.rect.y < characterY:
             self.rect.y += self.speed
         elif self.rect.y > characterY:
             self.rect.y -= self.speed
