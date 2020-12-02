@@ -51,6 +51,7 @@ class Controller:
         self.wave_font = pygame.font.Font('assets/customFont.ttf', 50)
         self.complete_font = pygame.font.Font('assets/customFont.ttf', 50)
         self.lever_font = pygame.font.Font('assets/customFont.ttf', 20)
+        self.fastest_run_font = pygame.font.Font('assets/customFont.ttf', 60)
 
         ##ESTABLISH BUTTON LOCATIONS##
         self.button_size = (250, 64)
@@ -380,7 +381,7 @@ class Controller:
 
             ##SCREEN UPDATES##
             self.all_sprites.update()
-            self.display.fill((255, 255, 255))
+            self.display.fill((0, 0, 0))
             self.display.blit(self.background.image, self.background.rect)
 
             self.display.blit(health_display, (360, 10))
@@ -433,15 +434,14 @@ class Controller:
         ## Logic for best time mechanic ##
         total_game_time = pygame.time.get_ticks()
         print(bin.functions.convertTime(total_game_time))
-
         best_score = bin.score.Score(self.best_time)
         new_best_score = best_score.changeScore(total_game_time)
 
         fileref = open("assets/highScore.json", "w")
         json.dump(best_score.__dict__, fileref)
         fileref.close()
-        print(self.character.__dict__)
 
+        fastest_run_display = self.fastest_run_font.render("Current fastest run:   " + str(bin.functions.convertTime(best_score.bestTime)),  False, (255, 255, 255))
 
         while self.STATE == "victory":
             for event in pygame.event.get():
@@ -450,6 +450,7 @@ class Controller:
 
             self.display.fill((255, 255, 255))
             self.display.blit(self.background.image, self.background.rect)
+            self.display.blit(fastest_run_display, (150, 730))
             pygame.display.flip()
 
     def loseScreen(self):
