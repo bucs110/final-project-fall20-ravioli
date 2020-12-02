@@ -13,8 +13,10 @@ import json
 class Controller:
     def __init__(self):
         """
-        Initializes the screen and the main variables
+        Initializes the screen, the main variables, data permanence feature which keeps track of the highest score using a JSON file,
+        the screen boundaries, the wave system; it establishes the sprite groups, screen text,and button locations
         args: none
+        return: none
         """
 
         pygame.font.init()
@@ -67,7 +69,8 @@ class Controller:
 
     def mainloop(self):
         """
-        Determines which loops of the game should run
+        Determines which loops of the game should run --> the states are
+        start, gameplay, exit, next wave of enemies, victory screen, and lose screen
         args: none
         return: none
         """
@@ -108,7 +111,8 @@ class Controller:
 
     def gameloop(self):
         """
-        Main loop of the gameplay where the character can move and fight
+        Main loop of the gameplay where the character can move, fight, take damage by losing health, die, and buy upgrades(increase in health, speed, and damage output) from merchants;
+        this is where enemies spawn- enemies can be different types and can take damage, give damage, die, and move; here there are different waves of gameplay and enemies
         Args: none
         Return: none
         """
@@ -417,7 +421,7 @@ class Controller:
 
     def victory(self):
         """
-        displays the winning screen
+        displays the winning screen, checks if game score is the new high score
         args: none
         return: none
         """
@@ -450,7 +454,7 @@ class Controller:
 
     def loseScreen(self):
         """
-        displays the winning screen
+        displays the losing screen
         args: none
         return: none
         """

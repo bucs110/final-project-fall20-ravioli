@@ -4,7 +4,7 @@ import bin.controller
 class Score():
     def __init__ (self, highScore):
         """
-        creates JSON high score data permanence feature
+        initiaizlizes JSON high score data permanence feature
         args: highScore --> (int) high score
         return: none
         """
@@ -14,7 +14,7 @@ class Score():
     def changeScore(self, newScore):
         """
         changes score if new score is higher than current high score
-        args: newScore --> (int) the score that the current player got on the game
+        args: newScore --> (int) the score that the current player earned in the game
         return: none
         """
         #check if new high score or not and update that object here
