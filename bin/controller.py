@@ -32,6 +32,7 @@ class Controller:
         self.STATE = "start"
         self.current_wave = 0
         self.wave_list = os.listdir("assets/waves")
+        self.wave_list.sort()
         self.wave = "assets/waves/" + str(self.wave_list[self.current_wave])
         #print(self.wave_list)
         self.enemy_spawn_time = 100
@@ -64,8 +65,6 @@ class Controller:
         fileref = open ("assets/highScore.json","r")
         score = json.load(fileref)
         self.best_time = score["bestTime"]
-        #print(score)
-        #print(score["bestTime"])
         fileref.close
 
     def mainloop(self):

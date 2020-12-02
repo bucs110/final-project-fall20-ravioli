@@ -2,30 +2,30 @@
 Enemy Type : tracker
 Starting coordinate X : 200
 Starting coordinate Y : 200
-Enemy Health : 95
-Enemy speed : 25
+Enemy Health : 80
+Enemy speed : 4
 ===============  Enemy 2  : ========================
 Enemy Type : tracker
 Starting coordinate X : 300
 Starting coordinate Y : 400
 Enemy Health : 50
-Enemy speed : 10
+Enemy speed : 4
 ===============  Enemy 3  : ========================
 Enemy Type : tracker
 Starting coordinate X : 700
 Starting coordinate Y : 200
 Enemy Health : 80
-Enemy speed : 10
+Enemy speed : 4
 ===============  Enemy 4  : ========================
 Enemy Type : roamer
 Starting coordinate X : 800
-Starting coordinate Y : 800
+Starting coordinate Y : 550
 Enemy Health : 80
 Enemy speed : 5
 ===============  Enemy 5  : ========================
 Enemy Type : roamer
 Starting coordinate X : 500
-Starting coordinate Y : 1000
+Starting coordinate Y : 550
 Enemy Health : 60
 Enemy speed : 5
 ===============  Enemy 6  : ========================
@@ -37,48 +37,48 @@ Enemy speed : 5
 ===============  Enemy 7  : ========================
 Enemy Type : tracker
 Starting coordinate X : 50
-Starting coordinate Y : 800
+Starting coordinate Y : 550
 Enemy Health : 60
-Enemy speed : 5
+Enemy speed : 4
 ===============  Enemy 8  : ========================
 Enemy Type : roamer
-Starting coordinate X : 90
-Starting coordinate Y : 900
+Starting coordinate X : 190
+Starting coordinate Y : 250
 Enemy Health : 50
 Enemy speed : 5
 ===============  Enemy 9  : ========================
 Enemy Type : tracker
 Starting coordinate X : 300
-Starting coordinate Y : 900
+Starting coordinate Y : 300
 Enemy Health : 75
 Enemy speed : 3
 ===============  Enemy 10  : ========================
 Enemy Type : roamer
-Starting coordinate X : 100
-Starting coordinate Y : 800
+Starting coordinate X : 300
+Starting coordinate Y : 350
 Enemy Health : 60
 Enemy speed : 4
 ===============  Enemy 11  : ========================
 Enemy Type : roamer
-Starting coordinate X : 90
-Starting coordinate Y : 500
+Starting coordinate X : 390
+Starting coordinate Y : 350
 Enemy Health : 50
 Enemy speed : 5
 ===============  Enemy 12  : ========================
 Enemy Type : roamer
 Starting coordinate X : 400
-Starting coordinate Y : 800
+Starting coordinate Y : 500
 Enemy Health : 80
 Enemy speed : 4
 ===============  Enemy 13  : ========================
 Enemy Type : horizontal
-Starting coordinate X : 90
+Starting coordinate X : 490
 Starting coordinate Y : 500
 Enemy Health : 50
 Enemy speed : 5
 ===============  Enemy 14  : ========================
 Enemy Type : roamer
 Starting coordinate X : 400
-Starting coordinate Y : 800
+Starting coordinate Y : 350
 Enemy Health : 80
 Enemy speed : 4

@@ -1,12 +1,18 @@
 ===============  Enemy 1  : ========================
-Enemy Type : tracker
+Enemy Type : still
 Starting coordinate X : 400
 Starting coordinate Y : 400
-Enemy Health : 5
-Enemy speed : 3
+Enemy Health : 10
+Enemy speed : 0
 ===============  Enemy 2  : ========================
+Enemy Type : still
+Starting coordinate X : 800
+Starting coordinate Y : 400
+Enemy Health : 10
+Enemy speed : 0
+===============  Enemy 3  : ========================
 Enemy Type : horizontal
 Starting coordinate X : 650
 Starting coordinate Y : 300
-Enemy Health : 6
-Enemy speed : 1
+Enemy Health : 10
+Enemy speed : 2

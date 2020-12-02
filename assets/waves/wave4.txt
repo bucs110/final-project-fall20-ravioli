@@ -3,34 +3,34 @@ Enemy Type : tracker
 Starting coordinate X : 600
 Starting coordinate Y : 500
 Enemy Health : 25
-Enemy speed : 5
+Enemy speed : 1
 ===============  Enemy 2  : ========================
 Enemy Type : tracker
 Starting coordinate X : 650
 Starting coordinate Y : 300
 Enemy Health : 25
-Enemy speed : 5
+Enemy speed : 1
 ===============  Enemy 3  : ========================
 Enemy Type : tracker
 Starting coordinate X : 700
-Starting coordinate Y : 100
+Starting coordinate Y : 200
 Enemy Health : 25
-Enemy speed : 5
+Enemy speed : 1
 ===============  Enemy 4  : ========================
 Enemy Type : roamer
 Starting coordinate X : 500
-Starting coordinate Y : 700
+Starting coordinate Y : 200
 Enemy Health : 25
-Enemy speed : 5
+Enemy speed : 3
 ===============  Enemy 5  : ========================
 Enemy Type : horizontal
 Starting coordinate X : 50
-Starting coordinate Y : 600
+Starting coordinate Y : 550
 Enemy Health : 25
 Enemy speed : 5
 ===============  Enemy 6  : ========================
 Enemy Type : roamer
-Starting coordinate X : 50
-Starting coordinate Y : 600
+Starting coordinate X : 400
+Starting coordinate Y : 430
 Enemy Health : 25
-Enemy speed : 5
+Enemy speed : 3

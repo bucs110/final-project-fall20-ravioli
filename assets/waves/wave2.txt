@@ -3,22 +3,28 @@ Enemy Type : roamer
 Starting coordinate X : 300
 Starting coordinate Y : 500
 Enemy Health : 10
-Enemy speed : 3
+Enemy speed : 2
 ===============  Enemy 2  : ========================
 Enemy Type : horizontal
 Starting coordinate X : 650
 Starting coordinate Y : 300
 Enemy Health : 10
-Enemy speed : 3
+Enemy speed : 2
 ===============  Enemy 3  : ========================
 Enemy Type : roamer
 Starting coordinate X : 700
-Starting coordinate Y : 100
+Starting coordinate Y : 150
 Enemy Health : 10
-Enemy speed : 3
+Enemy speed : 2
 ===============  Enemy 4  : ========================
 Enemy Type : roamer
 Starting coordinate X : 500
-Starting coordinate Y : 700
+Starting coordinate Y : 500
 Enemy Health : 15
-Enemy speed : 3
+Enemy speed : 2
+===============  Enemy 5  : ========================
+Enemy Type : still
+Starting coordinate X : 150
+Starting coordinate Y : 150
+Enemy Health : 25
+Enemy speed : 2

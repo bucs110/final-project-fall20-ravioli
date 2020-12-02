@@ -57,6 +57,7 @@ def animate(folder, animation_rate, current_iteration, frame, animation_frame):
     return: (touple) --> animation_frame (str), current_iteration (int), and frame (int)
     """
     animation_list = os.listdir(folder)
+    animation_list.sort()
     if frame % animation_rate == 0:
         current_iteration += 1
         if current_iteration == len(animation_list):
