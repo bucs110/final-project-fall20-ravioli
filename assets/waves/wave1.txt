@@ -4,3 +4,9 @@ Starting coordinate X : 400
 Starting coordinate Y : 400
 Enemy Health : 5
 Enemy speed : 1
+===============  Enemy 2  : ========================
+Enemy Type : horizontal
+Starting coordinate X : 650
+Starting coordinate Y : 300
+Enemy Health : 6
+Enemy speed : 1
