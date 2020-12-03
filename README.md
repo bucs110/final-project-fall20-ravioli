@@ -35,7 +35,7 @@ This is the screen the player sees while playing the game and fighting enemies.
 This is the screen the player sees while buying from merchants in-between rounds of gameplay.
  *![gui design](assets/gui_design_lose.jpg)
  This is the screen the player sees if they lose the game.
- *![gui design](assets/gui_design_victory.jpg)
+ *![gui design](assets/gui_design_victory2.jpg)
  This is the screen the player sees if they win the game.
 
 
@@ -59,7 +59,7 @@ This is the screen the player sees while buying from merchants in-between rounds
         * ![class diagram](assets/class_diagram.jpg) 
 * Classes
     * Character- This is the knight player that the user controls. It can move around, get hit by an enemy and lose health, get knocked back after being hit, and attack an enemy.
-    * Enemy- This creates the different kinds of enemies that the character fights. There are roamer enemies, enemies that move horizontally, and enemies that follow the knight. The enemies can change direction, lose health after being hit, knock back the knight after hitting the knight
+    * Enemy- This creates the different kinds of enemies that the character fights. There are roamer enemies, enemies that move horizontally, and enemies that follow the knight. The enemies can change direction, lose health after being hit, and knock back the knight after hitting the knight.
     * Melee- This creates the sword weapon which deals melee damage to the enemies (not currently in use- left in for potential future repurpose).
     * Button- This creates a button that can be clicked and toggled after being clicked.
     * Merchant- This is a seller that the knight can buy upgrades from.
@@ -81,10 +81,10 @@ Front-end lead conducted significant research on animations and general GUI desi
 
 ### Back End Specialist - Josef Schindler
 
-<< The back end specialist... >>
+The Back End specialist collaborated with Greene and Ragsuo in the project design and the initial classes overview. From there, Schindler went to create all of the classes and implemented them into the controller class. He was the main developer behind almost everything in the "bin" directory, with help from Greene in the follow() method for the enemy class and the data permanence feature. Collaborated with Raguso to incorporate the front-end visualizations into the game itself including the animation functions. The format for the Wave text files and the system for using the text files to feed information into the classes were implemented by Schindler, though the specific waves were designed by Raguso. The most challenging aspect was creating the wave text files in such a way that they were easy for any developer to read, understand, and edit, but also be able to be used directly to generate the different enemies for each wave.
 
 ## Testing
-* ****I tested the code at least once a week; however, whenever I saw that new code had been pushed, I pulled it and ran it to ensure it was working properly. I regularly went through the code to make sure I understood it all, that it was all dry, and that it made sense and worked together. As a team, we went through the code twice. I used an exploratory testing method to ensure optimization because it was the most time efficient and, in my opinion, the most true to life way of testing out our game. I mostly played the game to the extent that it was made at the moment and went through each action that was made then. I knew how the game was supposed to be played and the objective of it, so I would go through every action that the character could do, such as moving up/down/left/right, swinging its sword in thin air, swinging its sword to hit an enemy, killing enemies, and dying. I also went through every sound that could be made in the game while it was running to ensure that the sounds came across correctly.****
+* ****I tested the code at least once a week; however, whenever I saw that new code had been pushed, I pulled it and ran it to ensure it was working properly. I regularly went through the code to make sure I understood it all, that it was all dry, and that it made sense and worked together. As a team, we went through the code twice. I used an exploratory testing method to ensure optimization because it was the most efficient and, in my opinion, the most true to life way of testing out our game. I mostly played the game to the extent that it was made at the moment and went through each action that was made then. I knew how the game was supposed to be played and the objective of it, so I would go through every action that the character could do, such as moving up/down/left/right, swinging its sword in thin air, swinging its sword to hit an enemy, killing enemies, and dying. I also went through every sound that could be made in the game while it was running to ensure that the sounds came across correctly.****
 
 * Your ATP
 
