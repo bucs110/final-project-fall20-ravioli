@@ -29,7 +29,7 @@ This is the screen the player sees while playing the game.
 ## Final User Interface Design
  *![gui design](assets/gui_design_screen.jpg)
  This is the screen the player sees when they begin the game.
-*![gui design](assets/gui_final_fighting.jpg)
+*![gui design](assets/gui_final_fighting3.jpg)
 This is the screen the player sees while playing the game and fighting enemies.
 *![gui design](assets/gui_final_merchants3.jpg)
 This is the screen the player sees while buying from merchants in-between rounds of gameplay.
