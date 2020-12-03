@@ -31,7 +31,7 @@ This is the screen the player sees while playing the game.
  This is the screen the player sees when they begin the game.
 *![gui design](assets/gui_final_fighting.jpg)
 This is the screen the player sees while playing the game and fighting enemies.
-*![gui design](assets/gui_final_merchants.jpg)
+*![gui design](assets/gui_final_merchants2.jpg)
 This is the screen the player sees while buying from merchants in-between rounds of gameplay.
  *![gui design](assets/gui_design_lose.jpg)
  This is the screen the player sees if they lose the game.
